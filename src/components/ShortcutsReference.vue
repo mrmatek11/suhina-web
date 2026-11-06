@@ -3,13 +3,15 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { motion, useReducedMotion } from 'motion-v'
 import { filterShortcuts, parseShortcuts, platforms, presets, shortcutCategories } from '../data/shortcuts'
 import type { Platform, Preset, Shortcut } from '../data/shortcuts'
+import { replacingPrerender } from '../prerendered'
 
-const entries = ref<Shortcut[]>([])
+const props = defineProps<{ initialEntries?: Shortcut[] }>()
+const entries = ref<Shortcut[]>(props.initialEntries ?? [])
 const platform = ref<Platform>('windows')
 const preset = ref<Preset>('Select-first')
 const category = ref('All')
 const query = ref('')
-const loading = ref(true)
+const loading = ref(!props.initialEntries)
 const error = ref('')
 const reducedMotion = useReducedMotion()
 const matches = computed(() => filterShortcuts(entries.value, category.value, query.value, preset.value, platform.value))
@@ -33,7 +35,7 @@ async function load() {
     if (!request.signal.aborted) loading.value = false
   }
 }
-onMounted(() => { void load() })
+onMounted(() => { if (!props.initialEntries) void load() })
 onUnmounted(() => controller?.abort())
 </script>
 
@@ -52,7 +54,7 @@ onUnmounted(() => controller?.abort())
       <button v-for="value in shortcutCategories" :key="value" :class="{ active: category === value }" :aria-pressed="category === value" @click="category = value">{{ value }}</button>
     </div>
     <div class="results-top"><span role="status" aria-live="polite">{{ loading ? 'LOADING SHORTCUTS…' : error ? 'SHORTCUTS UNAVAILABLE' : `${matches.length} ${matches.length === 1 ? 'ACTION' : 'ACTIONS'} / ${category === 'All' ? 'ALL CATEGORIES' : category.toUpperCase()}` }}</span><button @click="reset">Reset filters ↺</button></div>
-    <motion.div :key="category" :initial="{ opacity: reducedMotion ? 1 : 0.35 }" :animate="{ opacity: 1 }" :transition="{ duration: reducedMotion ? 0 : 0.5 }">
+    <motion.div :key="category" :initial="{ opacity: reducedMotion || replacingPrerender() ? 1 : 0.35 }" :animate="{ opacity: 1 }" :transition="{ duration: reducedMotion ? 0 : 0.5 }">
       <div v-if="error" class="empty" role="alert">{{ error }} <button class="retry" @click="load">Try again ↗</button></div>
       <template v-else-if="!loading">
         <details v-for="entry in matches" :id="`shortcut-${entry.id}`" :key="entry.id" class="shortcut-entry">

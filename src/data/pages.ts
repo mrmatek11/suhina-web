@@ -1,5 +1,13 @@
 export type SitePage = 'home' | 'guide' | 'settings' | 'shortcuts'
 
+/** Every page the site publishes: each one is a build entry, is prerendered and is listed in the sitemap. */
+export const sitePages: readonly SitePage[] = ['home', 'guide', 'settings', 'shortcuts']
+
+/** The HTML entry file of a page, relative to the project root and to `dist`. */
+export function pageEntry(page: SitePage): string {
+  return page === 'home' ? 'index.html' : `${page}/index.html`
+}
+
 export function resolvePage(pathname: string, base = '/'): SitePage {
   const relative = pathname.startsWith(base) ? pathname.slice(base.length) : pathname
   const path = relative.replace(/^\/+|\/+$/g, '').replace(/\/index\.html$/, '')

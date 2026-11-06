@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { motion, useReducedMotion } from 'motion-v'
 import SampleMapStudy from './SampleMapStudy.vue'
+import { replacingPrerender } from '../prerendered'
 const base = import.meta.env.BASE_URL
 const reducedMotion = useReducedMotion()
+const still = replacingPrerender()
 const repository = 'https://github.com/suhina-daw/suhina-daw'
 const downloads = [
   { name: 'Windows', detail: 'x64 · ZIP', file: 'suhina-nightly-windows-x86_64.zip' },
@@ -13,7 +15,7 @@ const downloads = [
 
 <template>
   <div class="product-home">
-    <motion.section id="home" class="product-hero" :initial="{ opacity: reducedMotion ? 1 : 0 }" :animate="{ opacity: 1 }" :transition="{ duration: reducedMotion ? 0 : .5 }">
+    <motion.section id="home" class="product-hero" :initial="{ opacity: reducedMotion || still ? 1 : 0 }" :animate="{ opacity: 1 }" :transition="{ duration: reducedMotion || still ? 0 : .5 }">
       <div class="hero-copy">
         <div class="product-eyebrow"><span class="live-dot"></span> FREE &amp; OPEN SOURCE <span class="stage-tag">PRE-ALPHA</span></div>
         <h1>Make music<br>in the <span>open.</span></h1>

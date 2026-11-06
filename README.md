@@ -14,13 +14,15 @@ npm run dev
 Open http://127.0.0.1:5173. Vite provides hot reload. Stop a server with Ctrl+C.
 
 ```sh
-npm run build       # Type-check and build to dist/
+npm run build       # Type-check, build to dist/ and prerender every page
 npm run preview     # Serve the production build at http://127.0.0.1:4173
 npm test            # Data validation and search checks (Node 22.12+)
 python -m unittest discover -s scripts -p "test_*.py"
 ```
 
-The output is static: deploy `dist/` to a static host. Production needs no Python, Node server, or backend. Vite's `base` option can be set when deploying under a subdirectory; the settings URL and brand assets follow it.
+The output is static: deploy `dist/` to a static host. Production needs no Python, Node server, or backend. Vite's `base` option can be set when deploying under a subdirectory; the settings URL and brand assets follow it. The canonical URLs, link-preview tags, `sitemap.xml` and `robots.txt` use the published address in `src/data/site.ts`, so a deployment elsewhere changes it there.
+
+The build renders each page's HTML in Node (`src/entry-server.ts`, `scripts/prerender.ts`), so the published files already contain their text, including every settings explanation and shortcut, for search engines, link previews and readers without JavaScript. The browser then renders the same page over it. A new page goes in `sitePages` in `src/data/pages.ts`, which makes it a build entry, prerenders it and lists it in the sitemap. Code that runs while a page renders must not touch `window` or `document` unguarded, since the prerender has neither.
 
 ## Structure
 

@@ -1,5 +1,6 @@
 node_modules/
 dist/
+dist-ssr/
 .vite/
 .native-source/
 __pycache__/
