@@ -44,6 +44,12 @@ The custom domain serves the app at `/`, matching Vite's current base. Without a
 
 Check `https://suhina.org`, the `www` redirect, HTTPS, the brand assets and `settings.json`. Test search, categories, expanded explanations, keyboard controls and a mobile viewport. Record any outstanding content or layout review before approving the first public release.
 
+## Search engines
+
+`suhina.org` is a verified Domain property in Google Search Console, verified with a `google-site-verification` TXT record on `@` in Namecheap. Keep that record: removing it ends the verification. Bing Webmaster Tools imported the site from Search Console and re-checks the verification through it, so Bing needs no record of its own.
+
+Every build writes `sitemap.xml` and `robots.txt` (pointing to the sitemap) into `dist`, and prerenders each page with a canonical URL and link-preview tags. Submit `https://suhina.org/sitemap.xml` once in Search Console under Sitemaps; Bing reads sitemaps submitted there. A new page added to `sitePages` joins the sitemap automatically.
+
 References: [GitHub Pages workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), [custom domain and DNS](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
 
 ## Shortcut rollout

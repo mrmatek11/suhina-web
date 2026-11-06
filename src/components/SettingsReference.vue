@@ -4,10 +4,11 @@ import { motion, useReducedMotion } from 'motion-v'
 import { filterSettings, pages } from '../data/settings'
 import type { Category, Setting } from '../data/settings'
 import SettingEntry from './SettingEntry.vue'
+import { replacingPrerender } from '../prerendered'
 
 const props = defineProps<{ settings: Setting[]; loading: boolean; error: string; category: Category }>()
 const emit = defineEmits<{ category: [category: Category]; retry: [] }>()
-const query = ref(new URLSearchParams(window.location.search).get('q')?.slice(0, 200) ?? '')
+const query = ref(typeof window === 'undefined' ? '' : new URLSearchParams(window.location.search).get('q')?.slice(0, 200) ?? '')
 const searchInput = ref<HTMLInputElement | null>(null)
 const reducedMotion = useReducedMotion()
 const matches = computed(() => filterSettings(props.settings, props.category, query.value))
@@ -29,7 +30,7 @@ defineExpose({ clearSearch, focusSearch })
     </div>
     <div class="results-top"><span id="result-count" role="status" aria-live="polite">{{ loading ? 'LOADING SETTINGS…' : error ? 'SETTINGS UNAVAILABLE' : resultLabel }}</span><button id="reset-filters" @click="emit('category', 'All')">Reset filters ↺</button></div>
     <motion.div :key="category" id="settings-results"
-      :initial="{ opacity: reducedMotion ? 1 : 0.35 }"
+      :initial="{ opacity: reducedMotion || replacingPrerender() ? 1 : 0.35 }"
       :animate="{ opacity: 1 }"
       :transition="{ duration: reducedMotion ? 0 : 0.5, ease: [0.4, 0, 0.2, 1] }">
         <div v-if="error" class="empty" role="alert">{{ error }} <button class="retry" @click="emit('retry')">Try again ↗</button></div>

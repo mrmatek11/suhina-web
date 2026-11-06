@@ -11,15 +11,21 @@ import ShortcutsReference from './components/ShortcutsReference.vue'
 import SiteFooter from './components/SiteFooter.vue'
 import { pages, parseSettings } from './data/settings'
 import type { Category, Setting } from './data/settings'
+import type { Shortcut } from './data/shortcuts'
 import { pageUrl, resolvePage } from './data/pages'
+import type { SitePage } from './data/pages'
 
-const page = resolvePage(window.location.pathname, import.meta.env.BASE_URL)
+// The build prerenders each page in Node (see scripts/prerender.ts), where there is no window:
+// it passes the page and the reference data as props instead.
+const props = defineProps<{ page?: SitePage; initialSettings?: Setting[]; initialShortcuts?: Shortcut[] }>()
+const browser = typeof window !== 'undefined'
+const page = props.page ?? resolvePage(browser ? window.location.pathname : '/', import.meta.env.BASE_URL)
 
-const settings = ref<Setting[]>([])
-const initialCategory = new URLSearchParams(window.location.search).get('category')
+const settings = ref<Setting[]>(props.initialSettings ?? [])
+const initialCategory = browser ? new URLSearchParams(window.location.search).get('category') : null
 const category = ref<Category>(initialCategory && Object.hasOwn(pages, initialCategory) ? initialCategory as Category : 'All')
-const loading = ref(true)
-const loaded = ref(false)
+const loading = ref(!props.initialSettings)
+const loaded = ref(Boolean(props.initialSettings))
 const error = ref('')
 const reference = ref<InstanceType<typeof SettingsReference> | null>(null)
 let request: AbortController | undefined
@@ -74,7 +80,7 @@ onMounted(() => {
   document.addEventListener('keydown', handleKey)
   const initialHash = window.location.hash
   // Settings render above later chapters; resolve deep links after that async layout settles.
-  const ready = page === 'settings' ? loadSettings() : Promise.resolve()
+  const ready = page === 'settings' && !loaded.value ? loadSettings() : Promise.resolve()
   void ready.then(async () => {
     await nextTick()
     if (initialHash && window.location.hash === initialHash) {
@@ -98,7 +104,7 @@ onUnmounted(() => {
       <main class="reference-page">
         <template v-if="page === 'guide'"><GuideSection :count="loaded ? settings.length : null" /><FirstSound /></template>
         <SettingsReference v-if="page === 'settings'" ref="reference" :settings="settings" :category="category" :loading="loading" :error="error" @category="selectCategory" @retry="loadSettings" />
-        <ShortcutsReference v-if="page === 'shortcuts'" />
+        <ShortcutsReference v-if="page === 'shortcuts'" :initial-entries="initialShortcuts" />
         <SiteFooter />
       </main>
     </div>

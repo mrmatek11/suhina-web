@@ -7,6 +7,9 @@ import type { Setting } from '../data/settings'
 defineProps<{ setting: Setting }>()
 const open = ref(false)
 const reducedMotion = useReducedMotion()
+// The build's prerender writes every explanation into the closed entry so that it is part of the
+// published page; in the browser it renders when the entry opens, with its entrance animation.
+const prerendering = import.meta.env.SSR
 function toggle(event: Event) {
   if (event.target instanceof HTMLDetailsElement) open.value = event.target.open
 }
@@ -19,8 +22,8 @@ function toggle(event: Event) {
       <span class="setting-note">{{ setting.note }}</span>
       <span class="setting-plus" aria-hidden="true">+</span>
     </summary>
-    <motion.div v-if="open" class="setting-body"
-      :initial="{ opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : -4 }"
+    <motion.div v-if="open || prerendering" class="setting-body"
+      :initial="{ opacity: reducedMotion || prerendering ? 1 : 0, y: reducedMotion || prerendering ? 0 : -4 }"
       :animate="{ opacity: 1, y: 0 }" :transition="{ duration: reducedMotion ? 0 : 0.18 }">
       <p>Find it in <strong>Options → Settings → {{ pages[setting.page] }} → {{ setting.section }}</strong>.</p>
       <p v-if="setting.description">{{ setting.description }}</p>
