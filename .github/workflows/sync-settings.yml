@@ -87,3 +87,29 @@ jobs:
       - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # A failed run leaves the site on old data and is easy to miss among scheduled runs. Keep one open
+  # issue while runs fail, so the repository's watchers hear about it, and close it once a run passes.
+  report:
+    needs: [sync, publish]
+    if: always() && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TITLE: The website stopped following Suhina main
+      RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      FAILED: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+    steps:
+      - name: Open or close the failure issue
+        run: |
+          open=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number,title --jq "map(select(.title == env.TITLE))[0].number // empty")
+          if test "$FAILED" = true; then
+            if test -z "$open"; then
+              gh issue create --title "$TITLE" --body "The **Follow DAW main settings** workflow failed, so suhina.org keeps showing the settings and shortcuts from its last successful run. Read the failing step in $RUN. A rejected export usually means Suhina changed something the website's validation does not accept yet (see the README › Where the reference content comes from). This issue closes itself when a run succeeds again."
+            fi
+          elif test -n "$open"; then
+            gh issue close "$open" --comment "The workflow succeeded again: $RUN"
+          fi
