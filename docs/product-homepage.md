@@ -1,8 +1,8 @@
 # Product homepage proposal
 
-Product presentation proposal, prepared and checked in localhost before pushing for review.
-Not merged or published. This branch builds on the existing shortcut-reference PR; keep the
-product presentation review separate and merge the shortcut reference first.
+Status: history. This proposal was merged (suhina-daw/suhina-web#3) and is the live product page;
+the README describes the site as it is now. The notes below record how the page's claims were
+checked on 2026-10-21; recheck them against Suhina's main before changing those claims.
 
 ## Structure
 

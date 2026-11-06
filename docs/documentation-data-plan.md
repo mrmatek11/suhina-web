@@ -1,6 +1,6 @@
 # Versioned settings and shortcut documentation
 
-Status: settings export and main-only website synchronization are live on suhina.org. A native shortcut export and companion web reference are prepared for source review; merge the native proposal before publishing its content. Archived version selection remains future work.
+Status: slices 1–3 and the main-only synchronization are live on suhina.org: the settings and shortcut exports are written and reviewed in the Suhina repository and the website follows its main branch. The richer versioned envelope, implementation status field and archived version selection below remain future work. The README describes the current setup.
 
 ## Ownership and source
 
