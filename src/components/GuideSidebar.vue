@@ -10,7 +10,7 @@ const emit = defineEmits<{ category: [category: Category]; search: [] }>()
 
 <template>
   <aside class="sidebar">
-    <div class="sidebar-label">THE FIELD GUIDE <span>01—13</span></div>
+    <div class="sidebar-label">THE FIELD GUIDE <span>01—{{ String(Object.keys(pages).length).padStart(2, '0') }}</span></div>
     <button class="search-trigger" id="focus-search" @click="emit('search')">Find something <kbd>/</kbd></button>
     <nav id="side-nav" aria-label="Guide chapters">
       <a :href="`${base}guide/`" :aria-current="page === 'guide' ? 'page' : undefined"><span>↗</span> Getting started</a>

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { filterShortcuts, parseShortcuts, presets } from './shortcuts.ts'
+import { categoryList, filterShortcuts, parseShortcuts, presets } from './shortcuts.ts'
 
 export function shortcutFixture() {
   return { schemaVersion: 1, scope: 'default-and-window-actions', entries: [{
@@ -20,9 +20,19 @@ test('shortcut contract rejects incomplete, duplicate and unsupported data', () 
   assert.throws(() => parseShortcuts({ ...source, entries: [] }))
   assert.throws(() => parseShortcuts({ ...source, entries: [...source.entries, ...source.entries] }))
   for (const patch of [{ context: '' }, { helpStatus: 'needs-review' }, { sourceFingerprint: 'bad' },
-    { category: 'Unknown' }, { bindings: {} }, { bindings: { ...source.entries[0]!.bindings, 'Select-first': { windows: [[]] } } }]) {
+    { category: '' }, { category: 'x'.repeat(65) }, { bindings: {} }, { bindings: { ...source.entries[0]!.bindings, 'Select-first': { windows: [[]] } } }]) {
     assert.throws(() => parseShortcuts({ ...source, entries: [{ ...source.entries[0], ...patch }] }))
   }
+})
+
+test('a category the website does not know yet still loads and is listed after the known ones', () => {
+  const source = shortcutFixture()
+  const entry = source.entries[0]!
+  const entries = parseShortcuts({ ...source, entries: [
+    { ...entry, id: 'a', category: 'Mixer' }, { ...entry, id: 'b', category: 'Launcher' }, { ...entry, id: 'c', category: 'File' },
+  ] })
+  assert.deepEqual(categoryList(entries), ['File', 'Launcher', 'Mixer'])
+  assert.equal(filterShortcuts(entries, 'Mixer', '', 'Select-first', 'windows').length, 1)
 })
 
 test('shortcut search combines key tokens, context and category for the chosen OS and preset', () => {
