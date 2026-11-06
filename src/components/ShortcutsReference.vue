@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { motion, useReducedMotion } from 'motion-v'
-import { filterShortcuts, parseShortcuts, platforms, presets, shortcutCategories } from '../data/shortcuts'
+import { categoryList, filterShortcuts, parseShortcuts, platforms, presets } from '../data/shortcuts'
 import type { Platform, Preset, Shortcut } from '../data/shortcuts'
 import { replacingPrerender } from '../prerendered'
 
@@ -15,6 +15,7 @@ const loading = ref(!props.initialEntries)
 const error = ref('')
 const reducedMotion = useReducedMotion()
 const matches = computed(() => filterShortcuts(entries.value, category.value, query.value, preset.value, platform.value))
+const categories = computed(() => categoryList(entries.value))
 let controller: AbortController | undefined
 function reset() { category.value = 'All'; query.value = '' }
 async function load() {
@@ -51,7 +52,7 @@ onUnmounted(() => controller?.abort())
     <label class="search-box"><span aria-hidden="true">⌕</span><input v-model="query" type="search" aria-label="Search shortcuts" placeholder="Try “duplicate”, “Ctrl+B”, or “piano roll”…" @keydown.esc="query = ''"></label>
     <div class="filter-bar" aria-label="Filter shortcuts by category">
       <button :class="{ active: category === 'All' }" :aria-pressed="category === 'All'" @click="category = 'All'">All shortcuts</button>
-      <button v-for="value in shortcutCategories" :key="value" :class="{ active: category === value }" :aria-pressed="category === value" @click="category = value">{{ value }}</button>
+      <button v-for="value in categories" :key="value" :class="{ active: category === value }" :aria-pressed="category === value" @click="category = value">{{ value }}</button>
     </div>
     <div class="results-top"><span role="status" aria-live="polite">{{ loading ? 'LOADING SHORTCUTS…' : error ? 'SHORTCUTS UNAVAILABLE' : `${matches.length} ${matches.length === 1 ? 'ACTION' : 'ACTIONS'} / ${category === 'All' ? 'ALL CATEGORIES' : category.toUpperCase()}` }}</span><button @click="reset">Reset filters ↺</button></div>
     <motion.div :key="category" :initial="{ opacity: reducedMotion || replacingPrerender() ? 1 : 0.35 }" :animate="{ opacity: 1 }" :transition="{ duration: reducedMotion ? 0 : 0.5 }">

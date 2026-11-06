@@ -9,7 +9,7 @@ import FirstSound from './components/FirstSound.vue'
 import SettingsReference from './components/SettingsReference.vue'
 import ShortcutsReference from './components/ShortcutsReference.vue'
 import SiteFooter from './components/SiteFooter.vue'
-import { pages, parseSettings } from './data/settings'
+import { categoryFromQuery, parseSettings } from './data/settings'
 import type { Category, Setting } from './data/settings'
 import type { Shortcut } from './data/shortcuts'
 import { pageUrl, resolvePage } from './data/pages'
@@ -22,8 +22,7 @@ const browser = typeof window !== 'undefined'
 const page = props.page ?? resolvePage(browser ? window.location.pathname : '/', import.meta.env.BASE_URL)
 
 const settings = ref<Setting[]>(props.initialSettings ?? [])
-const initialCategory = browser ? new URLSearchParams(window.location.search).get('category') : null
-const category = ref<Category>(initialCategory && Object.hasOwn(pages, initialCategory) ? initialCategory as Category : 'All')
+const category = ref<Category>(categoryFromQuery(browser ? new URLSearchParams(window.location.search).get('category') : null))
 const loading = ref(!props.initialSettings)
 const loaded = ref(Boolean(props.initialSettings))
 const error = ref('')

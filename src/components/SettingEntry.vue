@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { motion, useReducedMotion } from 'motion-v'
-import { pages } from '../data/settings'
+import { pageLabel } from '../data/settings'
 import type { Setting } from '../data/settings'
 
 defineProps<{ setting: Setting }>()
@@ -18,14 +18,14 @@ function toggle(event: Event) {
 <template>
   <details class="setting" @toggle="toggle">
     <summary>
-      <div><span class="setting-title"><span class="setting-name">{{ setting.name }}</span><span v-if="setting.workInProgress" class="progress-pill">Work in progress</span></span><span class="setting-path">{{ pages[setting.page] }} / {{ setting.section }}</span></div>
+      <div><span class="setting-title"><span class="setting-name">{{ setting.name }}</span><span v-if="setting.workInProgress" class="progress-pill">Work in progress</span></span><span class="setting-path">{{ pageLabel(setting.page) }} / {{ setting.section }}</span></div>
       <span class="setting-note">{{ setting.note }}</span>
       <span class="setting-plus" aria-hidden="true">+</span>
     </summary>
     <motion.div v-if="open || prerendering" class="setting-body"
       :initial="{ opacity: reducedMotion || prerendering ? 1 : 0, y: reducedMotion || prerendering ? 0 : -4 }"
       :animate="{ opacity: 1, y: 0 }" :transition="{ duration: reducedMotion ? 0 : 0.18 }">
-      <p>Find it in <strong>Options → Settings → {{ pages[setting.page] }} → {{ setting.section }}</strong>.</p>
+      <p>Find it in <strong>Options → Settings → {{ pageLabel(setting.page) }} → {{ setting.section }}</strong>.</p>
       <p v-if="setting.description">{{ setting.description }}</p>
       <dl v-if="setting.options.length">
         <template v-for="option in setting.options" :key="option.name">

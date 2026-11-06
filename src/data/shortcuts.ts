@@ -1,7 +1,12 @@
-export const shortcutCategories = ['File', 'Transport', 'View', 'Edit', 'Tracks', 'Session', 'Piano roll', 'Help', 'Commands'] as const
+/**
+ * The order to show shortcut categories in. The export names each action's category; one missing
+ * here still loads and is listed after these, so a new category in Suhina never stops the website
+ * from following main.
+ */
+export const shortcutCategories = ['File', 'Transport', 'View', 'Edit', 'Tracks', 'Arrangement', 'Launcher', 'Piano roll', 'Help', 'Commands'] as const
 export const presets = ['Select-first', 'Draw-first', 'Mouse-first'] as const
 export const platforms = { windows: 'Windows', linux: 'Linux', macos: 'macOS' } as const
-export type ShortcutCategory = typeof shortcutCategories[number]
+export type ShortcutCategory = string
 export type Preset = typeof presets[number]
 export type Platform = keyof typeof platforms
 export type Keys = string[][]
@@ -37,7 +42,7 @@ export function parseShortcuts(value: unknown): Shortcut[] {
   return value.entries.map((entry: unknown) => {
     if (!record(entry) || !['id', 'name', 'category', 'description', 'context', 'whenToUse', 'platformNotes', 'sourceFingerprint'].every(field => text(entry[field]))
       || typeof entry.id !== 'string' || !/^[a-zA-Z][a-zA-Z0-9.]*$/.test(entry.id) || ids.has(entry.id)
-      || !shortcutCategories.some(category => category === entry.category)
+      || String(entry.category).length > 64
       || entry.helpStatus !== 'reviewed' || !/^[a-f0-9]{64}$/.test(String(entry.sourceFingerprint))
       || !record(entry.bindings)) throw new Error('Invalid or duplicate shortcut action.')
     const bindings = entry.bindings
@@ -57,6 +62,13 @@ export function parseShortcuts(value: unknown): Shortcut[] {
       context: entry.context, whenToUse: entry.whenToUse, platformNotes: entry.platformNotes,
       sourceFingerprint: entry.sourceFingerprint, helpStatus: entry.helpStatus, bindings: cleanBindings } as Shortcut
   })
+}
+
+/** The categories the entries use: the known ones in their order, then any others in the order they appear. */
+export function categoryList(entries: readonly Shortcut[]): string[] {
+  const used = new Set(entries.map(entry => entry.category))
+  const known: readonly string[] = shortcutCategories
+  return [...known.filter(category => used.has(category)), ...[...used].filter(category => !known.includes(category))]
 }
 
 function searchable(value: string): string {

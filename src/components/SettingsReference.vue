@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { motion, useReducedMotion } from 'motion-v'
-import { filterSettings, pages } from '../data/settings'
+import { filterSettings, pageLabel, pageList } from '../data/settings'
 import type { Category, Setting } from '../data/settings'
 import SettingEntry from './SettingEntry.vue'
 import { replacingPrerender } from '../prerendered'
@@ -12,7 +12,8 @@ const query = ref(typeof window === 'undefined' ? '' : new URLSearchParams(windo
 const searchInput = ref<HTMLInputElement | null>(null)
 const reducedMotion = useReducedMotion()
 const matches = computed(() => filterSettings(props.settings, props.category, query.value))
-const resultLabel = computed(() => `${String(matches.value.length).padStart(2, '0')} ENTRIES / ${props.category === 'All' ? 'ALL SETTINGS' : pages[props.category].toUpperCase()}`)
+const resultLabel = computed(() => `${String(matches.value.length).padStart(2, '0')} ENTRIES / ${props.category === 'All' ? 'ALL SETTINGS' : pageLabel(props.category).toUpperCase()}`)
+const categories = computed(() => pageList(props.settings))
 function clearSearch() { query.value = '' }
 function focusSearch() { searchInput.value?.focus({ preventScroll: true }) }
 function escapeSearch() { clearSearch(); searchInput.value?.blur() }
@@ -26,7 +27,7 @@ defineExpose({ clearSearch, focusSearch })
     <label class="search-box"><span aria-hidden="true">⌕</span><input ref="searchInput" v-model="query" id="settings-search" type="search" placeholder="Try “buffer”, “backups”, or “piano roll”…" aria-label="Search settings" @keydown.esc="escapeSearch"><kbd>/</kbd></label>
     <div class="filter-bar" id="filters" aria-label="Filter settings by category">
       <button :class="{ active: category === 'All' }" :aria-pressed="category === 'All'" @click="emit('category', 'All')">All settings</button>
-      <button v-for="(label, key) in pages" :key="key" :class="{ active: category === key }" :aria-pressed="category === key" @click="emit('category', key)">{{ label }}</button>
+      <button v-for="key in categories" :key="key" :class="{ active: category === key }" :aria-pressed="category === key" @click="emit('category', key)">{{ pageLabel(key) }}</button>
     </div>
     <div class="results-top"><span id="result-count" role="status" aria-live="polite">{{ loading ? 'LOADING SETTINGS…' : error ? 'SETTINGS UNAVAILABLE' : resultLabel }}</span><button id="reset-filters" @click="emit('category', 'All')">Reset filters ↺</button></div>
     <motion.div :key="category" id="settings-results"
