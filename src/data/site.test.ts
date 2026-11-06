@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import test from 'node:test'
-import { headTags, prerenderPage, robotsTxt, sitemapXml } from './site.ts'
+import { headTags, prerenderPage, robotsTxt, shareImage, sitemapXml } from './site.ts'
 
 const built = `<!doctype html>
 <html lang="en">
@@ -19,8 +20,15 @@ test('a prerendered page carries its markup and head tags built from its own tit
   assert.match(page, /<link rel="canonical" href="https:\/\/suhina\.org\/guide\/">/)
   assert.match(page, /<meta property="og:title" content="Suhina — The guide">/)
   assert.match(page, /<meta property="og:description" content="Get started with Suhina: audio &amp; settings\.">/)
-  assert.match(page, /<meta property="og:image" content="https:\/\/suhina\.org\/assets\/product\/suhina-arrangement\.png">/)
+  assert.ok(page.includes(`<meta property="og:image" content="https://suhina.org/${shareImage.path}">`))
   assert.ok(page.indexOf('og:url') < page.indexOf('</head>'))
+})
+
+test('the share image is a published PNG of the size its tags state', () => {
+  const png = readFileSync(new URL(`../../public/${shareImage.path}`, import.meta.url))
+  assert.deepEqual([...png.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a])
+  assert.equal(png.readUInt32BE(16), shareImage.width)
+  assert.equal(png.readUInt32BE(20), shareImage.height)
 })
 
 test('rendered markup is inserted literally, without replacement patterns', () => {
