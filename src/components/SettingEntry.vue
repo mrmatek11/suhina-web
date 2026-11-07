@@ -40,7 +40,7 @@ function toggle(event: Event) {
 
 <style scoped>
 .setting-title { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
-.progress-pill { display: inline-block; padding: 3px 8px; border-radius: 999px; background: var(--orange); color: var(--ink); font: 9px/1.4 var(--mono); white-space: nowrap; }
+.progress-pill { display: inline-block; padding: 3px 8px; border-radius: 999px; background: var(--orange); color: var(--on-orange); font: 9px/1.4 var(--mono); white-space: nowrap; }
 dd { margin: 3px 0 12px 18px; }
 code + code { margin-left: 5px; }
 </style>

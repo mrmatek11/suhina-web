@@ -43,6 +43,23 @@ sound colors. The hero is asymmetrical; feature sections alternate spacious text
 explanation. Artcraft was a reference for hierarchy and product-first presentation, not copied
 for layout, logo treatment, orbiting media, type pairing or animation.
 
+### Light and dark theme
+
+The site follows the system's light or dark setting. The round button in the header switches to
+the other theme and stores that choice in the browser (`localStorage` key `suhina-theme`);
+switching back to the system's own theme removes the stored choice. A small script in the
+`<head>` of each page (`index.html`, `guide/`, `settings/`, `shortcuts/`) applies the stored
+choice before the first paint, so a page never flashes the wrong theme.
+
+The colours are tokens on `:root` in `src/styles/main.css`: `--paper`, `--ink`, `--muted`,
+`--line`, `--orange` (the yellow highlight), `--on-orange` (text on it), `--olive` and the song-bar
+tints `--sand` and `--clay`. The dark values come from Suhina's own suhina-studio theme. Grey
+shades are written as `color-mix(in srgb, var(--ink) N%, var(--paper))` instead of fixed hex
+values, so they turn with the theme; a new colour should be one of these mixes or a token. The
+sample map illustration stays dark in both themes. The header and footer carry two logo images,
+`suhina-logo.svg` and the white-lettered `suhina-logo-dark.svg`, and CSS shows the one that fits
+the theme.
+
 The hero now uses the user-supplied Arrangement screenshot (`bQTeTd1jV8.png`), copied unchanged
 to `public/assets/product/suhina-arrangement.png`. It is labeled Arrangement detail and links to
 the full-size image. The sample map remains an original SVG/Vue concept illustration, visibly
