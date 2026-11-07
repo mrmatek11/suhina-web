@@ -47,7 +47,7 @@ onUnmounted(() => controller?.abort())
     <div class="shortcut-controls">
       <label>Operating system<select v-model="platform"><option v-for="(label, value) in platforms" :key="value" :value="value">{{ label }}</option></select></label>
       <label>Keymap preset<select v-model="preset"><option v-for="value in presets" :key="value">{{ value }}</option></select></label>
-      <p>These are the preset defaults. Your own changes in <strong>Settings → Shortcuts</strong> take precedence.</p>
+      <p>These are the preset defaults. Your own changes in <strong>Settings → Keys → Shortcuts</strong> take precedence.</p>
     </div>
     <label class="search-box"><span aria-hidden="true">⌕</span><input v-model="query" type="search" aria-label="Search shortcuts" placeholder="Try “duplicate”, “Ctrl+B”, or “piano roll”…" @keydown.esc="query = ''"></label>
     <div class="filter-bar" aria-label="Filter shortcuts by category">
@@ -69,11 +69,11 @@ onUnmounted(() => controller?.abort())
       </template>
     </motion.div>
     <details class="customize-notes"><summary>Make the keys your own <span aria-hidden="true">↗</span></summary><div>
-      <p>Open <strong>Options → Settings → Shortcuts</strong>. Find an action, choose <strong>Change</strong> and press the keys you want. Escape cancels capture. <strong>Clear</strong> removes that action's binding; conflicting assignments are shown in red.</p>
+      <p>Open <strong>Options → Settings → Keys → Shortcuts</strong>. Find an action, choose <strong>Change</strong> and press the keys you want. Escape cancels capture. <strong>Clear</strong> removes that action's binding; conflicting assignments are shown in red.</p>
       <p>Choosing Select-first, Draw-first or Mouse-first restores that preset's keys and piano-roll workflow settings, replacing custom bindings. <strong>Reset all</strong> returns to Select-first. Custom keeps the current workflow settings; its bindings are specific to you, so it has no default set to display here.</p>
       <p>Text fields, active value editing and open dialogs can keep the keyboard. Click the intended editor before using a shortcut. In the piano roll, the same arrows and selection keys can act on notes rather than Session slots or Arrangement clips.</p>
     </div></details>
-    <p class="source-note">Default-bound actions and window actions from Suhina. Settings → Shortcuts also includes commands with no default binding that are outside this directory. Mouse gestures and importing a custom keymap are not included here.</p>
+    <p class="source-note">Default-bound actions and window actions from Suhina. Settings → Keys → Shortcuts also includes commands with no default binding that are outside this directory. Mouse gestures and importing a custom keymap are not included here.</p>
   </section>
 </template>
 

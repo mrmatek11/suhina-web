@@ -5,12 +5,16 @@ import type { SitePage } from './pages.ts'
 
 export const siteOrigin = 'https://suhina.org'
 
-/** The image link previews show, relative to the site root, with its size in pixels. */
+/**
+ * The image link previews show, relative to the site root, with its size in pixels: the Suhina logo
+ * on white, 1200 × 630, the size Discord, X and others crop previews to. A PNG, since link
+ * previews do not render SVG.
+ */
 export const shareImage = {
-  path: 'assets/product/suhina-arrangement.png',
-  width: 1251,
-  height: 492,
-  alt: 'Suhina Arrangement showing audio waveforms, MIDI note clips and track controls together on the song timeline',
+  path: 'assets/brand/suhina-logo-light.png',
+  width: 1200,
+  height: 630,
+  alt: 'Suhina',
 } as const
 
 export function absolutePageUrl(page: SitePage, origin = siteOrigin): string {
