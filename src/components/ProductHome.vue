@@ -43,9 +43,9 @@ const devices = [
         <img :src="shot('suhina-session')" alt="Suhina Session view with colored clips for drums, bass, keys and vocals above a mixer with faders and level meters" width="1280" height="800" fetchpriority="high">
       </figure>
       <div class="hero-top">
-        <h1>The open-source DAW you can restyle with CSS.</h1>
+        <h1>Make music<br>in the open.</h1>
         <div>
-          <p class="hero-description">Make music in the open. Suhina is a free music workstation for Windows, macOS and Linux. Explore samples by sound, build songs with clips and a timeline, and invite an AI agent into your project.</p>
+          <p class="hero-description">A free music workstation for Windows, macOS and Linux. Explore samples by sound, build songs with clips and a timeline, and invite an AI agent into your project.</p>
           <p class="hero-actions"><a class="download" href="#download">Try the pre-alpha</a><a class="link" :href="`${base}guide/`">Read the guide</a></p>
         </div>
       </div>
@@ -59,7 +59,7 @@ const devices = [
       <figcaption>Arrangement. Audio and MIDI, arranged together.</figcaption>
     </figure>
 
-    <HomeChapter id="themes" title="Make it look like yours." ruled>
+    <HomeChapter id="themes" title="The open-source DAW you can restyle with CSS." ruled>
       <p>Suhina's look is a theme, written in CSS with SVG and PNG artwork. Choose a built-in theme, change its settings, move the interface around, or write your own.</p><p>Export a theme as one .theme.suhina file to share it.</p><p><a class="link" :href="`${base}settings/?category=Themes`">Explore theme settings</a></p>
     </HomeChapter>
     <ThemeGallery />
@@ -117,7 +117,7 @@ const devices = [
 .product-home { --cols: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr); }
 
 .hero-top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--gutter); align-items: end; padding: clamp(32px, 4vw, 56px) var(--gutter) clamp(24px, 3vw, 44px); }
-.hero-top h1 { max-width: 13ch; font-size: clamp(40px, min(6.2vw, 10.5vh), 104px); }
+.hero-top h1 { font-size: clamp(48px, min(8vw, 13vh), 128px); }
 .hero-description { font-size: 19px; color: var(--olive); }
 .hero-actions, .open-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin: 24px 0 0; }
 .hero-actions .download { padding: 12px 18px; font-size: 14px; }
