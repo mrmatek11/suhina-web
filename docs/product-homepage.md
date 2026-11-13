@@ -38,8 +38,8 @@ ownership and main-only synchronization remain unchanged.
 
 ## Visual direction
 
-Preserve warm paper, Manrope, DM Mono, charcoal and yellow, with restrained olive/terracotta
-sound colors. The hero is asymmetrical; feature sections alternate spacious text and a visual
+Redesigned in November 2026 after Elektron product pages: near-black or off-white, Inter Tight, DM Mono for labels, one yellow accent,
+numbered chapters with a narrow text column, and full-bleed dark media panels that stay dark in both themes. Feature sections alternate text and a visual
 explanation. Artcraft was a reference for hierarchy and product-first presentation, not copied
 for layout, logo treatment, orbiting media, type pairing or animation.
 

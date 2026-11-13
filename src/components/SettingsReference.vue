@@ -45,6 +45,5 @@ defineExpose({ clearSearch, focusSearch })
 </template>
 
 <style scoped>
-.reference-title { font-size: 34px; letter-spacing: -1.5px; font-weight: 500; line-height: 1.2; margin: 8px 0 0; }
 .retry { background: transparent; border: 0; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 </style>

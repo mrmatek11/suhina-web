@@ -15,6 +15,6 @@ const base = import.meta.env.BASE_URL
 </template>
 
 <style scoped>
-h1 { font-size: clamp(42px, 5vw, 68px); line-height: 1.12; letter-spacing: -.06em; font-weight: 500; margin: 24px 0 18px; }
-.guide-intro { max-width: 480px; color: var(--muted); font-size: 13px; }
+h1 { font-size: clamp(44px, 6vw, 96px); line-height: .95; letter-spacing: -.04em; margin: 16px 0 20px; }
+.guide-intro { max-width: 520px; color: var(--olive); font-size: 18px; }
 </style>

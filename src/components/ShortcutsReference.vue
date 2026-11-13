@@ -78,38 +78,36 @@ onUnmounted(() => controller?.abort())
 </template>
 
 <style scoped>
-.reference-title { font-size: 34px; letter-spacing: -1.5px; font-weight: 500; line-height: 1.2; margin: 8px 0 0; }
-.shortcuts-section { padding: 42px 54px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--ink) 3%, var(--paper)); scroll-margin-top: 15px; }
-.chapter-mark { font: 20px var(--mono); color: var(--muted); white-space: nowrap; }
-.shortcut-controls { display: grid; grid-template-columns: minmax(135px, 1fr) minmax(150px, 1fr) 1.5fr; gap: 20px; align-items: end; margin: 26px 0 22px; }
-.shortcut-controls label { display: grid; gap: 8px; font: 10px var(--mono); color: var(--muted); }
-.shortcut-controls select { width: 100%; padding: 10px 12px; border: 1px solid color-mix(in srgb, var(--ink) 23%, var(--paper)); border-radius: 0; background: var(--paper); color: var(--ink); font: 12px var(--sans); }
+.shortcuts-section { padding: 56px var(--gutter); border-bottom: 1px solid var(--line); scroll-margin-top: 15px; }
+.chapter-mark { font: 18px var(--mono); color: var(--muted); white-space: nowrap; }
+.shortcut-controls { display: grid; grid-template-columns: minmax(150px, 1fr) minmax(160px, 1fr) 1.5fr; gap: 20px; align-items: end; margin: 0 0 22px; }
+.shortcut-controls label { display: grid; gap: 8px; font: 12px var(--mono); color: var(--muted); }
+.shortcut-controls select { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--raised); color: var(--ink); font-size: 15px; }
 .shortcut-controls select:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
-.shortcut-controls p { margin: 0; color: var(--muted); font-size: 11px; }
-.shortcut-entry { border-top: 1px solid color-mix(in srgb, var(--ink) 18%, var(--paper)); }
-.shortcut-entry:last-child { border-bottom: 1px solid color-mix(in srgb, var(--ink) 18%, var(--paper)); }
-.shortcut-entry summary { display: grid; grid-template-columns: minmax(0, 1fr) minmax(120px, auto) 14px; align-items: center; gap: 22px; padding: 18px 0; cursor: pointer; list-style: none; }
+.shortcut-controls p { margin: 0; color: var(--muted); font-size: 14px; }
+.shortcut-entry { border-top: 1px solid var(--line); }
+.shortcut-entry:last-child { border-bottom: 1px solid var(--line); }
+.shortcut-entry summary { display: grid; grid-template-columns: minmax(0, 1fr) minmax(120px, auto) 16px; align-items: center; gap: 22px; padding: 16px 0; cursor: pointer; list-style: none; }
 .shortcut-entry summary::-webkit-details-marker { display: none; }
-.shortcut-entry summary:hover .action-name { text-decoration: underline; text-decoration-color: var(--orange); text-underline-offset: 4px; }
-.action-name { font-size: 12px; font-weight: 600; }
-.action-category { display: block; margin-top: 3px; font: 9px var(--mono); color: var(--muted); }
-.key-alternatives { display: flex; gap: 7px; flex-wrap: wrap; justify-content: end; align-items: center; max-width: 280px; }
+.shortcut-entry summary:hover .action-name { color: var(--orange); }
+.action-name { font-size: 16px; font-weight: 600; }
+.action-category { display: block; margin-top: 2px; font: 12px var(--mono); font-weight: 400; color: var(--muted); }
+.key-alternatives { display: flex; gap: 8px; flex-wrap: wrap; justify-content: end; align-items: center; max-width: 300px; }
 .chord { display: inline-flex; gap: 3px; white-space: nowrap; }
-kbd { background: var(--paper); border-color: color-mix(in srgb, var(--ink) 23%, var(--paper)); color: var(--ink); font-size: 10px; padding: 3px 6px; }
-.or, .unbound { font: 9px var(--mono); color: var(--muted); }
-.entry-plus { color: var(--muted); font-size: 19px; }
+kbd { background: var(--raised); color: var(--ink); font-size: 12px; padding: 3px 7px; }
+.or, .unbound { font: 12px var(--mono); color: var(--muted); }
+.entry-plus { color: var(--muted); font-size: 20px; transition: transform .2s; }
 .shortcut-entry[open] .entry-plus { transform: rotate(45deg); }
-.shortcut-body { max-width: 700px; padding: 0 30px 24px 0; color: color-mix(in srgb, var(--ink) 73%, var(--paper)); font-size: 12px; }
+.shortcut-body { max-width: 700px; padding: 0 30px 24px 0; color: var(--olive); font-size: 15px; }
 .shortcut-body p { margin-top: 0; }
-.shortcut-body dl { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 12px 20px; margin: 20px 0 0; }
-dt { font: 9px/1.8 var(--mono); color: var(--ink); }
+.shortcut-body dl { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 12px 20px; margin: 20px 0 0; }
+dt { font: 12px/1.9 var(--mono); color: var(--ink); }
 dd { margin: 0; }
 .retry { background: none; border: 0; text-decoration: underline; color: var(--ink); }
-.customize-notes { margin-top: 28px; border: 1px solid color-mix(in srgb, var(--ink) 18%, var(--paper)); padding: 15px 18px; font-size: 12px; }
+.customize-notes { margin-top: 32px; border: 1px solid var(--line); border-radius: 4px; padding: 16px 20px; font-size: 15px; }
 .customize-notes summary { cursor: pointer; font-weight: 600; }
 .customize-notes summary span { float: right; }
-.customize-notes p { color: color-mix(in srgb, var(--ink) 73%, var(--paper)); max-width: 720px; }
-@media (min-width: 1500px) { .shortcuts-section { padding-left: 75px; padding-right: 75px; } }
-@media (max-width: 1050px) { .shortcuts-section { padding: 32px; } .shortcut-controls { grid-template-columns: 1fr 1fr; } .shortcut-controls p { grid-column: 1 / -1; } }
-@media (max-width: 720px) { .shortcuts-section { padding: 30px 22px; } .chapter-mark { font-size: 15px; } .shortcut-entry summary { grid-template-columns: minmax(0, 1fr) 14px; gap: 10px; } .key-alternatives { grid-row: 2; grid-column: 1; justify-content: start; max-width: none; } .entry-plus { grid-column: 2; grid-row: 1 / 3; } .shortcut-body { padding-right: 0; } .shortcut-body dl { grid-template-columns: 1fr; gap: 5px; } dd + dt { margin-top: 10px; } }
+.customize-notes p { color: var(--olive); max-width: 720px; }
+@media (max-width: 1050px) { .shortcut-controls { grid-template-columns: 1fr 1fr; } .shortcut-controls p { grid-column: 1 / -1; } }
+@media (max-width: 720px) { .shortcuts-section { padding: 40px var(--gutter); } .chapter-mark { font-size: 14px; } .shortcut-entry summary { grid-template-columns: minmax(0, 1fr) 16px; gap: 10px; } .key-alternatives { grid-row: 2; grid-column: 1; justify-content: start; max-width: none; } .entry-plus { grid-column: 2; grid-row: 1 / 3; } .shortcut-body { padding-right: 0; } .shortcut-body dl { grid-template-columns: 1fr; gap: 5px; } dd + dt { margin-top: 10px; } }
 </style>

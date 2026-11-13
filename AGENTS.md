@@ -4,7 +4,7 @@ How to work on the Suhina website. The README explains the structure; read it fi
 
 ## Website development
 
-Use Vue 3 single-file components with TypeScript, Vite, plain CSS, and Motion for Vue (`motion-v`). Preserve the established warm paper palette, typography, spacing and responsive layout. Shared tokens and base styles live in `src/styles/main.css`; component-specific styles belong in scoped style blocks. Respect reduced motion and retain semantic keyboard-accessible controls. Treat JSON as untrusted data; validate it and render text through Vue interpolation, never `v-html`.
+Use Vue 3 single-file components with TypeScript, Vite, plain CSS, and Motion for Vue (`motion-v`). Preserve the established look: near-black (dark) or off-white (light) surfaces, Inter Tight with DM Mono for labels, one yellow accent, numbered chapters (heading beside a narrow text column) and full-bleed dark media panels. Shared tokens and base styles live in `src/styles/main.css`; component-specific styles belong in scoped style blocks. Respect reduced motion and retain semantic keyboard-accessible controls. Treat JSON as untrusted data; validate it and render text through Vue interpolation, never `v-html`.
 
 Every page is prerendered at build time, so component setup code must not use `window` or `document` without checking that they exist; read browser state in `onMounted` or behind a guard. An entrance animation that starts hidden must also start visible when replacing the prerendered page (`src/prerendered.ts`).
 

@@ -19,13 +19,13 @@ const base = import.meta.env.BASE_URL
 </template>
 
 <style scoped>
-.footer-links { margin-left: auto; display: flex; gap: 32px; }
-.footer-links > div { display: grid; gap: 7px; }
-.link-heading { font: 9px var(--mono); color: var(--muted); margin-bottom: 3px; }
-.footer-links a { font-size: 10px; }
-.footer-links a:hover { text-decoration: underline; text-decoration-color: var(--orange); text-underline-offset: 4px; }
-.contribute { min-width: 174px; align-self: start; border: 1px solid var(--line); }
-.contribute summary { padding: 10px 13px; cursor: pointer; list-style: none; font-size: 11px; }
+.footer-links { margin-left: auto; display: flex; gap: 48px; }
+.footer-links > div { display: grid; gap: 8px; align-content: start; }
+.link-heading { font: 12px var(--mono); color: var(--muted); margin-bottom: 4px; }
+.footer-links a { font-size: 14px; }
+.footer-links a:hover { color: var(--orange); }
+.contribute { min-width: 190px; align-self: start; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.contribute summary { padding: 10px 14px; cursor: pointer; list-style: none; font-size: 14px; }
 .contribute summary::-webkit-details-marker { display: none; }
 .expand { float: right; margin-left: 25px; }
 .contribute[open] .expand { transform: rotate(45deg); }
@@ -33,6 +33,7 @@ const base = import.meta.env.BASE_URL
 .contribute-options { display: flex; border-top: 1px solid var(--line); }
 .contribute-options a { flex: 1; display: flex; align-items: center; gap: 7px; padding: 10px; }
 .contribute-options a + a { border-left: 1px solid var(--line); }
-.contribute-options a:hover { background: color-mix(in srgb, var(--ink) 5%, var(--paper)); }
+.contribute-options a { font-size: 14px; }
+.contribute-options a:hover { background: var(--raised); }
 @media (max-width: 900px) { .footer-links { width: 100%; margin-left: 0; flex-wrap: wrap; gap: 24px; } }
 </style>
