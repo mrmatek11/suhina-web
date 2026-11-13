@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import AppShot from './AppShot.vue'
 
-const base = import.meta.env.BASE_URL
 const slides = [
-  { file: 'suhina-arrangement-dark', title: 'Dark', alt: 'Suhina Arrangement in a dark theme, with orange, yellow and blue MIDI clips beside track headers' },
   { file: 'suhina-theme-sheet', title: 'Suhina Sheet', alt: 'Suhina Session in the green and white Suhina Sheet theme' },
   { file: 'suhina-theme-blocks', title: 'Suhina Blocks', alt: 'Suhina Session in the brown, pixel-textured Suhina Blocks theme' },
+  { file: 'suhina-mixer-horizontal', title: 'A horizontal mixer', alt: 'Suhina Session in a dark theme whose mixer has horizontal faders and level meters' },
+  { file: 'suhina-session-compact', title: 'A compact Session', alt: 'Suhina Session in a dark theme with a compact mixer of pan dials and short faders' },
   { file: 'suhina-interface-editor', title: 'Editing the interface', alt: 'Suhina with the Edit interface panel open and every movable element outlined on a snap grid' },
 ]
 const track = ref<HTMLElement | null>(null)
@@ -32,7 +33,7 @@ function follow() {
   <section class="gallery" aria-label="Suhina themes">
     <div ref="track" class="track" tabindex="0" @scroll.passive="follow" @keydown.left.prevent="show(current - 1)" @keydown.right.prevent="show(current + 1)">
       <figure v-for="(slide, index) in slides" :key="slide.file" :class="{ away: index !== current }" @click="show(index)">
-        <img :src="`${base}assets/product/${slide.file}.png`" :alt="slide.alt" width="1280" height="800" loading="lazy">
+        <AppShot :name="slide.file" :alt="slide.alt" sizes="(min-width: 1310px) 1100px, 84vw" />
         <figcaption class="sr-only">{{ slide.title }}</figcaption>
       </figure>
     </div>
@@ -52,13 +53,12 @@ function follow() {
 .track { display: flex; gap: clamp(12px, 1.6vw, 24px); padding-inline: var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scroll-behavior: smooth; scrollbar-width: none; }
 .track::-webkit-scrollbar { display: none; }
 .track:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
-figure { flex: 0 0 min(84%, 1100px); margin: 0; scroll-snap-align: start; transition: opacity .3s; }
+figure { position: relative; flex: 0 0 min(84%, 1100px); margin: 0; scroll-snap-align: start; transition: opacity .3s; }
 figure.away { opacity: .35; cursor: pointer; }
 figure:last-child { margin-right: max(0px, 100% - min(84%, 1100px)); }
-img { display: block; width: 100%; height: auto; }
 .controls { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: clamp(16px, 2vw, 28px); padding-inline: var(--gutter); font-size: 14px; }
 .names { display: flex; flex-wrap: wrap; gap: 4px 24px; }
-button { padding: 2px 0; border: 0; background: transparent; color: #8a8a85; }
+button { padding: 6px 0; border: 0; background: transparent; color: #8a8a85; }
 button:hover:not(:disabled) { color: #ededea; }
 .names button[aria-pressed=true] { color: #ededea; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 6px; }
 .steps { display: flex; align-items: center; gap: 16px; color: #8a8a85; white-space: nowrap; font-variant-numeric: tabular-nums; }

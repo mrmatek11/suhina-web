@@ -85,7 +85,7 @@ Added with the redesign and checked against DAW main on 2026-11-13; recheck befo
 - Devices: the list is the devices marked done in the DAW's `ROADMAP.md` (Built-in effects and
   instruments). The SDK sentence follows the DAW README's Contributing section.
 - Themes: the copy follows `ROADMAP.md` (What works now, the theme entries). The screenshots are
-  the DAW's `docs/design/reference/theme-*.png`, copied unchanged to `public/assets/product/`.
+  the DAW's `docs/design/reference/theme-*.png`, converted to WebP in `public/assets/product/`.
   The `*-minimal-v3.png` files there are design mockups (see the DAW's `ATTRIBUTION.md`) and must
   not be shown as the product.
 - Progress: the chapter links to `suhina-daw/suhina-status`, where a bot redraws the status

@@ -7,6 +7,7 @@ const home = props.page === 'home'
 </script>
 
 <template>
+  <a class="skip" href="#main">Skip to content</a>
   <div class="site-header" :class="{ home }">
     <header class="topbar">
       <nav aria-label="Main navigation">

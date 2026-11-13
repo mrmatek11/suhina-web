@@ -28,7 +28,7 @@ const points = kinds.flatMap(kind => Array.from({ length: 43 }, (_, i) => ({ kin
 svg { display: block; width: 100%; height: auto; }
 circle { transition: opacity .2s; }
 .kind-controls { display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 14px; }
-button { padding: 2px 0; border: 0; background: transparent; color: #8a8a85; }
+button { padding: 6px 0; border: 0; background: transparent; color: #8a8a85; }
 button:hover { color: #ededea; }
 button[aria-pressed=true] { color: #ededea; text-decoration: underline; text-decoration-color: #ffd97d; text-decoration-thickness: 2px; text-underline-offset: 5px; }
 figcaption { min-height: 3em; margin-top: 16px; font-size: 17px; color: #ededea; }

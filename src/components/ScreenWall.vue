@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const base = import.meta.env.BASE_URL
-const shots = ['suhina-session', 'suhina-theme-sheet', 'suhina-arrangement-dark', 'suhina-theme-blocks', 'suhina-interface-editor']
-const rows = [0, 2, 4].map(start => Array.from({ length: 4 }, (_, index) => shots[(start + index) % shots.length]))
+const shots = ['suhina-session', 'suhina-theme-sheet', 'suhina-arrangement-dark', 'suhina-theme-blocks', 'suhina-mixer-horizontal', 'suhina-interface-editor', 'suhina-session-compact']
+const rows = [0, 3, 6].map(start => Array.from({ length: 4 }, (_, index) => shots[(start + index) % shots.length]))
 </script>
 
 <template>
   <div class="wall" aria-hidden="true">
     <div class="plane">
       <div v-for="(row, index) in rows" :key="index" class="row">
-        <img v-for="name in row" :key="name" :src="`${base}assets/product/${name}.png`" alt="" width="1280" height="800" loading="lazy">
+        <img v-for="name in row" :key="name" :src="`${base}assets/product/${name}-720.webp`" alt="" width="720" height="450" loading="lazy" decoding="async">
       </div>
     </div>
   </div>

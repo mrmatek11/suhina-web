@@ -97,10 +97,10 @@ onUnmounted(() => {
 <template>
   <MotionConfig reduced-motion="user">
     <SiteHeader :page="page" />
-    <template v-if="page === 'home'"><main class="product-page"><ProductHome /></main><SiteFooter /></template>
+    <template v-if="page === 'home'"><main id="main" class="product-page"><ProductHome /></main><SiteFooter /></template>
     <div v-else class="shell">
       <GuideSidebar :category="category" :page="page" @category="selectCategory" @search="focusSearch" />
-      <main class="reference-page">
+      <main id="main" class="reference-page">
         <template v-if="page === 'guide'"><GuideSection /><FirstSound /></template>
         <SettingsReference v-if="page === 'settings'" ref="reference" :settings="settings" :category="category" :loading="loading" :error="error" @category="selectCategory" @retry="loadSettings" />
         <ShortcutsReference v-if="page === 'shortcuts'" :initial-entries="initialShortcuts" />

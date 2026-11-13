@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { motion, useReducedMotion } from 'motion-v'
+import AppShot from './AppShot.vue'
 import HomeChapter from './HomeChapter.vue'
 import SampleMapStudy from './SampleMapStudy.vue'
 import ScreenWall from './ScreenWall.vue'
 import ThemeGallery from './ThemeGallery.vue'
+import ViewSwitch from './ViewSwitch.vue'
 import { replacingPrerender } from '../prerendered'
 const base = import.meta.env.BASE_URL
 const reducedMotion = useReducedMotion()
 const still = replacingPrerender()
 const repository = 'https://github.com/suhina-daw/suhina-daw'
-const shot = (name: string) => `${base}assets/product/${name}.png`
 const downloads = [
   { name: 'Windows', detail: 'x64, ZIP', file: 'suhina-nightly-windows-x86_64.zip' },
   { name: 'macOS', detail: 'Universal, TAR.GZ', file: 'suhina-nightly-macos-universal.tar.gz' },
@@ -40,7 +41,7 @@ const devices = [
   <div class="product-home">
     <motion.section id="home" :initial="{ opacity: reducedMotion || still ? 1 : 0 }" :animate="{ opacity: 1 }" :transition="{ duration: reducedMotion || still ? 0 : .5 }">
       <figure class="stage hero-media">
-        <img :src="shot('suhina-session')" alt="Suhina Session view with colored clips for drums, bass, keys and vocals above a mixer with faders and level meters" width="1280" height="800" fetchpriority="high">
+        <AppShot name="suhina-arrangement" alt="Suhina Arrangement showing audio waveforms, MIDI note clips and track controls together on the song timeline" :width="1251" :height="492" eager />
       </figure>
       <div class="hero-top">
         <h1>Make music<br>in the open.</h1>
@@ -54,10 +55,7 @@ const devices = [
     <HomeChapter id="song" title="Start with a loop. Decide where it goes.">
       <p>Launch clips and scenes in Session. Shape audio and MIDI on the Arrangement timeline. Both are part of the same project.</p><p>A short idea can become a song without leaving the workstation.</p><p><a class="link" :href="`${base}shortcuts/`">Find the keys for it</a></p>
     </HomeChapter>
-    <figure class="stage shot">
-      <img :src="shot('suhina-arrangement')" alt="Suhina Arrangement showing audio waveforms, MIDI note clips and track controls together on the song timeline" width="1251" height="492" loading="lazy">
-      <figcaption>Arrangement. Audio and MIDI, arranged together.</figcaption>
-    </figure>
+    <ViewSwitch />
 
     <HomeChapter id="themes" title="The open-source DAW you can restyle with CSS." ruled>
       <p>Suhina's look is a theme, written in CSS with SVG and PNG artwork. Choose a built-in theme, change its settings, move the interface around, or write your own.</p><p>Export a theme as one .theme.suhina file to share it.</p><p><a class="link" :href="`${base}settings/?category=Themes`">Explore theme settings</a></p>
@@ -72,6 +70,11 @@ const devices = [
     <HomeChapter id="features" title="Let an agent work with you.">
       <p>Your AI agent can inspect and edit the project open in Suhina. See the changes in the same window, hear them in your song, and use the same undo history.</p><p>You choose when to let an agent in. Enable access, approve the connection, and disconnect it from Suhina when you're done.</p><p><a class="link" :href="`${base}settings/?q=agents`">Explore agent access</a></p><p class="note">Requires an external agent that supports MCP, the connection standard Suhina uses. Agent access is off until you enable it.</p>
     </HomeChapter>
+
+    <figure class="stage command">
+      <code>track.setMute {"tracks": [1], "mute": true}</code>
+      <figcaption>Every action is a command. The app, the command line and an agent run the same ones.</figcaption>
+    </figure>
 
     <HomeChapter id="devices" title="Instruments and effects, in the box." ruled>
       <p>Suhina comes with its own devices. Every change to a control is one undo step, and automation can take it over.</p><p>You can also build audio effects, MIDI effects and instruments with the device SDK and share each one as a single .sd file.</p><p><a class="link" :href="`${repository}/blob/main/docs/device-sdk.md`" target="_blank" rel="noreferrer">Read the device SDK guide</a></p>
@@ -123,11 +126,10 @@ const devices = [
 .hero-actions .download { padding: 12px 18px; font-size: 14px; }
 
 .stage { margin: 0; padding: clamp(20px, 4vw, 64px) var(--gutter); background: #000; color: #ededea; }
-.stage img { display: block; width: 100%; height: auto; }
 .stage figcaption { margin-top: 12px; font-size: 14px; color: #8a8a85; }
 .hero-media { padding-block: clamp(16px, 2.4vw, 40px) 0; }
-.hero-media img { height: min(44vh, 52vw); object-fit: cover; object-position: top; }
-.hero-media img, .shot img, .shot figcaption { width: min(100%, 1280px); margin-inline: auto; }
+.hero-media img { width: min(100%, 1280px); max-height: 46vh; margin-inline: auto; object-fit: cover; object-position: top; }
+.command code { display: block; font-size: clamp(18px, 3.2vw, 44px); letter-spacing: -.02em; overflow-wrap: anywhere; }
 
 .rows { grid-column: 1 / -1; margin: 0; padding: 0; list-style: none; }
 .device-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 var(--gutter); }

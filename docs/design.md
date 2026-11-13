@@ -8,7 +8,7 @@ before it goes in.
 
 - **Two colours and one line.** `--ink` on `--paper`, with `--olive` and `--muted` as the two
   greys for secondary text and `--line` for rules. Dark and light swap the same tokens.
-  `--accent`, the yellow of the logo, is only ever a line: the short bar above a chapter heading, the underline of a link or of the
+  `--accent`, the yellow of the logo, is only ever a line: the underline of a link or of the
   selected item, and the focus ring. It never fills a shape and never colours text. Any other
   colour on a page comes from screenshots of Suhina.
 - **One typeface.** Host Grotesk in weights 400 and 600. `--mono` (Geist Mono) is only for
@@ -38,6 +38,8 @@ before it goes in.
   (`DAW`, `open source`, the platforms). `src/data/site.ts` builds the canonical URL, preview
   tags and the home page's structured data from them.
 - Fonts load from a `<link>` in each page's head with `preconnect`, never from CSS `@import`.
+- Screenshots are WebP in two widths (`name.webp`, `name-720.webp`) and are shown with
+  `AppShot.vue`, which writes the `srcset`.
 - Every image has its size, an `alt` that says what it shows, and `loading="lazy"` below the
   first screen. The first screenshot is the page's largest paint and has `fetchpriority="high"`.
 - Link text says where the link goes. No "click here", no bare arrows.
