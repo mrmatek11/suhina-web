@@ -88,6 +88,10 @@ Added with the redesign and checked against DAW main on 2026-11-13; recheck befo
   the DAW's `docs/design/reference/theme-*.png`, converted to WebP in `public/assets/product/`.
   The `*-minimal-v3.png` files there are design mockups (see the DAW's `ATTRIBUTION.md`) and must
   not be shown as the product.
+- More that works today: each line follows an entry under "What works now" in the DAW's
+  `ROADMAP.md` (several projects in tabs, ADR 0007; take lanes and comping; the piano roll;
+  automation lanes; real-time time-stretching; follow actions) or the DAW README (updates,
+  `suhina-cli`).
 - Progress: the chapter links to `suhina-daw/suhina-status`, where a bot redraws the status
   figure daily, so no number is written here. The wall of screenshots beside it is decoration
   made of the pictures above.

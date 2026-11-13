@@ -11,6 +11,16 @@ const base = import.meta.env.BASE_URL
 const reducedMotion = useReducedMotion()
 const still = replacingPrerender()
 const repository = 'https://github.com/suhina-daw/suhina-daw'
+const features = [
+  { name: 'Several projects at once', detail: 'Open projects in tabs and move between them with Ctrl+Tab. The active one plays.' },
+  { name: 'Take lanes and comping', detail: 'Record takes into the Arrangement, then cut and move the best parts together.' },
+  { name: 'Piano roll', detail: 'Edit MIDI notes with the mouse or the keyboard, and quantise them.' },
+  { name: 'Automation lanes', detail: 'Show a track\'s automation in lanes under it in the Arrangement.' },
+  { name: 'Time-stretching as it plays', detail: 'Warped clips follow their warp markers and the song\'s tempo in real time.' },
+  { name: 'Follow actions', detail: 'A launched clip can run an action when its time is up.' },
+  { name: 'Updates from inside the app', detail: 'Suhina says when a newer nightly is out. Nothing is installed until you ask.' },
+  { name: 'A command line', detail: 'suhina-cli plays and renders a project without opening the window.' },
+]
 const downloads = [
   { name: 'Windows', detail: 'x64, ZIP', file: 'suhina-nightly-windows-x86_64.zip' },
   { name: 'macOS', detail: 'Universal, TAR.GZ', file: 'suhina-nightly-macos-universal.tar.gz' },
@@ -79,7 +89,7 @@ const devices = [
     <HomeChapter id="devices" title="Instruments and effects, in the box." ruled>
       <p>Suhina comes with its own devices. Every change to a control is one undo step, and automation can take it over.</p><p>You can also build audio effects, MIDI effects and instruments with the device SDK and share each one as a single .sd file.</p><p><a class="link" :href="`${repository}/blob/main/docs/device-sdk.md`" target="_blank" rel="noreferrer">Read the device SDK guide</a></p>
       <template #after>
-      <ul class="rows device-list"><li v-for="device in devices" :key="device.name"><h3>{{ device.name }}</h3><p>{{ device.detail }}</p></li></ul>
+      <ul class="rows item-list"><li v-for="device in devices" :key="device.name"><h3>{{ device.name }}</h3><p>{{ device.detail }}</p></li></ul>
       </template>
     </HomeChapter>
 
@@ -89,6 +99,13 @@ const devices = [
 
     <HomeChapter id="import" title="A new place for an old project.">
       <p>Open existing .als projects, bring in audio and MIDI, and save your work in Suhina's own project format.</p><p class="note">Project import is evolving. Not every imported device or feature is reproduced; try your material and tell us what needs work.</p>
+    </HomeChapter>
+
+    <HomeChapter id="more" title="And more that works today." ruled>
+      <p>Suhina is pre-alpha, and a lot of it is already there to use.</p>
+      <template #after>
+      <ul class="rows item-list"><li v-for="feature in features" :key="feature.name"><h3>{{ feature.name }}</h3><p>{{ feature.detail }}</p></li></ul>
+      </template>
     </HomeChapter>
 
     <HomeChapter id="progress" title="Built in public. Counted in public." ruled>
@@ -132,9 +149,9 @@ const devices = [
 .command code { display: block; font-size: clamp(18px, 3.2vw, 44px); letter-spacing: -.02em; overflow-wrap: anywhere; }
 
 .rows { grid-column: 1 / -1; margin: 0; padding: 0; list-style: none; }
-.device-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 var(--gutter); }
-.device-list li { padding: 16px 0 20px; border-top: 1px solid var(--line); }
-.device-list p { margin: 4px 0 0; color: var(--olive); }
+.item-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 var(--gutter); }
+.item-list li { padding: 16px 0 20px; border-top: 1px solid var(--line); }
+.item-list p { margin: 4px 0 0; color: var(--olive); }
 
 .platforms a { display: grid; grid-template-columns: var(--cols); gap: var(--gutter); align-items: baseline; padding: 20px 0; border-top: 1px solid var(--line); }
 .platforms li:last-child a { border-bottom: 1px solid var(--line); }
