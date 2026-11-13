@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import AppShot from './AppShot.vue'
 
 const slides = [
+  { file: 'suhina-theme-glass', title: 'A community theme', alt: 'Suhina Arrangement in a translucent blue theme on macOS, with a CLAP synth\'s parameters in the device panel', width: 1920, height: 1162 },
   { file: 'suhina-theme-sheet', title: 'Suhina Sheet', alt: 'Suhina Session in the green and white Suhina Sheet theme' },
   { file: 'suhina-theme-blocks', title: 'Suhina Blocks', alt: 'Suhina Session in the brown, pixel-textured Suhina Blocks theme' },
   { file: 'suhina-mixer-horizontal', title: 'A horizontal mixer', alt: 'Suhina Session in a dark theme whose mixer has horizontal faders and level meters' },
@@ -33,7 +34,7 @@ function follow() {
   <section class="gallery" aria-label="Suhina themes">
     <div ref="track" class="track" tabindex="0" @scroll.passive="follow" @keydown.left.prevent="show(current - 1)" @keydown.right.prevent="show(current + 1)">
       <figure v-for="(slide, index) in slides" :key="slide.file" :class="{ away: index !== current }" @click="show(index)">
-        <AppShot :name="slide.file" :alt="slide.alt" sizes="(min-width: 1310px) 1100px, 84vw" />
+        <AppShot :name="slide.file" :alt="slide.alt" :width="slide.width" :height="slide.height" sizes="(min-width: 1310px) 1100px, 84vw" />
         <figcaption class="sr-only">{{ slide.title }}</figcaption>
       </figure>
     </div>

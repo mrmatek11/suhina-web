@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const base = import.meta.env.BASE_URL
-const shots = ['suhina-session', 'suhina-theme-sheet', 'suhina-arrangement-dark', 'suhina-theme-blocks', 'suhina-mixer-horizontal', 'suhina-interface-editor', 'suhina-session-compact']
+const shots = ['suhina-theme-glass', 'suhina-session', 'suhina-theme-sheet', 'suhina-arrangement-dark', 'suhina-theme-blocks', 'suhina-mixer-horizontal', 'suhina-interface-editor', 'suhina-session-compact']
 const rows = [0, 3, 6].map(start => Array.from({ length: 4 }, (_, index) => shots[(start + index) % shots.length]))
 </script>
 
@@ -20,7 +20,7 @@ const rows = [0, 3, 6].map(start => Array.from({ length: 4 }, (_, index) => shot
 .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: inherit; }
 .row:nth-child(2) { translate: -9% 0; }
 .row:nth-child(3) { translate: 6% 0; }
-img { display: block; width: 100%; height: auto; }
+img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; }
 
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {

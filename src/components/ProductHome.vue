@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { motion, useReducedMotion } from 'motion-v'
 import AppShot from './AppShot.vue'
+import FeatureReel from './FeatureReel.vue'
 import HomeChapter from './HomeChapter.vue'
 import SampleMapStudy from './SampleMapStudy.vue'
 import ScreenWall from './ScreenWall.vue'
@@ -51,7 +52,7 @@ const devices = [
   <div class="product-home">
     <motion.section id="home" :initial="{ opacity: reducedMotion || still ? 1 : 0 }" :animate="{ opacity: 1 }" :transition="{ duration: reducedMotion || still ? 0 : .5 }">
       <figure class="stage hero-media">
-        <AppShot name="suhina-arrangement" alt="Suhina Arrangement showing audio waveforms, MIDI note clips and track controls together on the song timeline" :width="1251" :height="492" eager />
+        <AppShot name="suhina-project" alt="A song of seventy tracks in Suhina's Arrangement: audio and MIDI clips in track colors along the timeline, with a clip's warp, gain and pitch controls below" sizes="(min-width: 1720px) 1600px, 100vw" :width="1919" :height="917" eager />
       </figure>
       <div class="hero-top">
         <h1>Make music<br>in the open.</h1>
@@ -71,6 +72,14 @@ const devices = [
       <p>Suhina's look is a theme, written in CSS with SVG and PNG artwork. Choose a built-in theme, change its settings, move the interface around, or write your own.</p><p>Export a theme as one .theme.suhina file to share it.</p><p><a class="link" :href="`${base}settings/?category=Themes`">Explore theme settings</a></p>
     </HomeChapter>
     <ThemeGallery />
+
+    <HomeChapter id="more" title="Edit notes, automation and audio." ruled>
+      <p>Suhina is pre-alpha, and a lot of it is already there to use.</p>
+      <template #after>
+      <ul class="rows item-list"><li v-for="feature in features" :key="feature.name"><h3>{{ feature.name }}</h3><p>{{ feature.detail }}</p></li></ul>
+      </template>
+    </HomeChapter>
+    <FeatureReel />
 
     <HomeChapter id="sample-map" title="You know the sound. Maybe not its name.">
       <p>The sample map groups your samples by how they sound. Similar sounds become neighbors, so one good find can lead you to the next.</p><p>Explore a cloud or a grid, preview samples as you move through the map, and bring a sound into your project.</p><p><a class="link" :href="`${base}settings/?category=Browser&q=sample+map`">Explore sample map settings</a></p><p class="note">The illustration shows the idea. In Suhina, the map is built from samples in your library.</p>
@@ -99,13 +108,6 @@ const devices = [
 
     <HomeChapter id="import" title="A new place for an old project.">
       <p>Open existing .als projects, bring in audio and MIDI, and save your work in Suhina's own project format.</p><p class="note">Project import is evolving. Not every imported device or feature is reproduced; try your material and tell us what needs work.</p>
-    </HomeChapter>
-
-    <HomeChapter id="more" title="And more that works today." ruled>
-      <p>Suhina is pre-alpha, and a lot of it is already there to use.</p>
-      <template #after>
-      <ul class="rows item-list"><li v-for="feature in features" :key="feature.name"><h3>{{ feature.name }}</h3><p>{{ feature.detail }}</p></li></ul>
-      </template>
     </HomeChapter>
 
     <HomeChapter id="progress" title="Built in public. Counted in public." ruled>
@@ -145,7 +147,7 @@ const devices = [
 .stage { margin: 0; padding: clamp(20px, 4vw, 64px) var(--gutter); background: #000; color: #ededea; }
 .stage figcaption { margin-top: 12px; font-size: 14px; color: #8a8a85; }
 .hero-media { padding-block: clamp(16px, 2.4vw, 40px) 0; }
-.hero-media img { width: min(100%, 1280px); max-height: 46vh; margin-inline: auto; object-fit: cover; object-position: top; }
+.hero-media img { width: min(100%, 1600px); max-height: 46vh; margin-inline: auto; object-fit: cover; object-position: top; }
 .command code { display: block; font-size: clamp(18px, 3.2vw, 44px); letter-spacing: -.02em; overflow-wrap: anywhere; }
 
 .rows { grid-column: 1 / -1; margin: 0; padding: 0; list-style: none; }
