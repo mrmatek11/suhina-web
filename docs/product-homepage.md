@@ -38,7 +38,7 @@ ownership and main-only synchronization remain unchanged.
 
 ## Visual direction
 
-Redesigned in November 2026 after Elektron product pages: near-black or off-white, Host Grotesk, Geist Mono for labels, one yellow accent,
+Redesigned in November 2026: near-black or off-white, Host Grotesk, Geist Mono for keys and file names, one yellow accent line,
 numbered chapters with a narrow text column, and full-bleed dark media panels that stay dark in both themes. Feature sections alternate text and a visual
 explanation. Artcraft was a reference for hierarchy and product-first presentation, not copied
 for layout, logo treatment, orbiting media, type pairing or animation.

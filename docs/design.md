@@ -1,6 +1,6 @@
 # Website design rules
 
-The site follows the plainness of a hardware maker's product page: type, screenshots and
+The site is plain on purpose: type, screenshots and
 space. Anything that does not carry information is left out. Check a change against this list
 before it goes in.
 
