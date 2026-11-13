@@ -11,7 +11,6 @@ const slides = [
 const track = ref<HTMLElement | null>(null)
 const current = ref(0)
 
-/** How far each slide is from where it rests when shown: the row's left edge plus its padding. */
 function offsets(row: HTMLElement): number[] {
   const rest = row.getBoundingClientRect().left + (parseFloat(getComputedStyle(row).paddingLeft) || 0)
   return Array.from(row.children, slide => slide.getBoundingClientRect().left - rest)
@@ -19,10 +18,8 @@ function offsets(row: HTMLElement): number[] {
 function show(index: number) {
   const row = track.value
   if (!row) return
-  // Scrolls the row itself, so the page never moves.
   row.scrollTo({ left: row.scrollLeft + offsets(row)[Math.max(0, Math.min(slides.length - 1, index))] })
 }
-/** The slide nearest its resting place, so the names follow a swipe or a drag as well as the buttons. */
 function follow() {
   const row = track.value
   if (!row) return
@@ -57,7 +54,6 @@ function follow() {
 .track:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 figure { flex: 0 0 min(84%, 1100px); margin: 0; scroll-snap-align: start; transition: opacity .3s; }
 figure.away { opacity: .35; cursor: pointer; }
-/* The last slide can reach the left edge only if there is room to scroll past it. */
 figure:last-child { margin-right: max(0px, 100% - min(84%, 1100px)); }
 img { display: block; width: 100%; height: auto; }
 .controls { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: clamp(16px, 2vw, 28px); padding-inline: var(--gutter); font-size: 14px; }

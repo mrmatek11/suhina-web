@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// One chapter of the home page: its number and heading, with a narrow column of text beside them.
-// The default slot is that text; `after` spans the full width below it (a list, the downloads).
 defineProps<{ number?: string; title?: string; ruled?: boolean }>()
 </script>
 

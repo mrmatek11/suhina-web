@@ -2,6 +2,7 @@
 import { motion, useReducedMotion } from 'motion-v'
 import HomeChapter from './HomeChapter.vue'
 import SampleMapStudy from './SampleMapStudy.vue'
+import ScreenWall from './ScreenWall.vue'
 import ThemeGallery from './ThemeGallery.vue'
 import { replacingPrerender } from '../prerendered'
 const base = import.meta.env.BASE_URL
@@ -14,8 +15,6 @@ const downloads = [
   { name: 'macOS', detail: 'Universal, TAR.GZ', file: 'suhina-nightly-macos-universal.tar.gz' },
   { name: 'Linux', detail: 'x86_64, TAR.GZ', file: 'suhina-nightly-linux-x86_64.tar.gz' },
 ]
-// The devices marked done in Suhina's ROADMAP.md (Built-in effects and instruments). Recheck the
-// table there before adding one: a device belongs here once it runs in track chains.
 const devices = [
   { name: 'FM Synth', detail: 'Six operators, 43 algorithms. Reads DX7 voices.' },
   { name: 'Sampler', detail: 'Sample, slice and grain playback.' },
@@ -90,11 +89,9 @@ const devices = [
     </HomeChapter>
 
     <HomeChapter id="progress" number="08" title="Built in public. Counted in public." ruled>
-      <p>How much of each area of Suhina works today. A box's size is its number of features, its fill the share done; the red number is the area's open bugs.</p><p>The maintainers count it from their feature list and a bot redraws it every day.</p><p><a class="link" :href="`${repository}/blob/main/ROADMAP.md`" target="_blank" rel="noreferrer">What works &amp; what's next</a></p>
+      <p>The maintainers count how much of each area of Suhina works today from their feature list, and a bot redraws the figure every day.</p><p class="open-links"><a class="link" href="https://github.com/suhina-daw/suhina-status" target="_blank" rel="noreferrer">See today's status by area</a><a class="link" :href="`${repository}/blob/main/ROADMAP.md`" target="_blank" rel="noreferrer">What works &amp; what's next</a></p>
     </HomeChapter>
-    <figure class="stage status">
-      <img src="https://raw.githubusercontent.com/suhina-daw/suhina-status/main/status-dark.svg" alt="Suhina by area: how many features are done, in progress and planned, with the open bugs" width="680" height="420" loading="lazy">
-    </figure>
+    <ScreenWall />
 
     <HomeChapter id="download" number="09" title="Early days. Real things to try.">
       <p>Open projects. Launch clips. Edit audio and MIDI. Explore the sample map. Work with plug-ins and connect an agent.</p><p class="note">Expect unfinished workflows, changing behavior and bugs. Start with copies of your projects. These are nightly development builds, not a stable release.</p>
@@ -125,15 +122,12 @@ const devices = [
 .hero-actions, .open-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin: 24px 0 0; }
 .hero-actions .download { padding: 12px 18px; font-size: 14px; }
 
-/* Pictures sit on black in both themes. */
 .stage { margin: 0; padding: clamp(20px, 4vw, 64px) var(--gutter); background: #000; color: #ededea; }
 .stage img { display: block; width: 100%; height: auto; }
 .stage figcaption { margin-top: 12px; font-size: 14px; color: #8a8a85; }
 .hero-media { padding-block: clamp(16px, 2.4vw, 40px) 0; }
-/* The first screen shows the top of the app and the headline together. */
 .hero-media img { height: min(44vh, 52vw); object-fit: cover; object-position: top; }
-.hero-media img, .shot img, .shot figcaption, .status img { width: min(100%, 1280px); margin-inline: auto; }
-.status img { width: min(100%, 880px); }
+.hero-media img, .shot img, .shot figcaption { width: min(100%, 1280px); margin-inline: auto; }
 
 .rows { grid-column: 1 / -1; margin: 0; padding: 0; list-style: none; }
 .device-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 var(--gutter); }

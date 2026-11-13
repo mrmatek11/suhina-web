@@ -24,7 +24,6 @@ const home = props.page === 'home'
       </div>
     </header>
   </div>
-  <!-- The product bar stays in view on the home page while the main bar scrolls away. -->
   <div v-if="home" class="subbar">
     <a class="sub-name" href="#home">Suhina</a>
     <nav aria-label="On this page">
@@ -35,7 +34,6 @@ const home = props.page === 'home'
 </template>
 
 <style scoped>
-/* The same three columns as the main bar, so the links sit under the logo. */
 .subbar { position: sticky; top: 0; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; height: 52px; padding: 0 var(--gutter); background: var(--paper); border-bottom: 1px solid var(--line); font-size: 14px; color: var(--olive); }
 .sub-name { font-weight: 600; color: var(--ink); }
 .subbar nav, .sub-tools { display: flex; align-items: center; gap: 24px; }

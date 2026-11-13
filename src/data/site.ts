@@ -49,7 +49,6 @@ export function headTags(page: SitePage, title: string, description: string, ori
   ].join('\n  ')
 }
 
-/** What Suhina is, for search engines (schema.org), on the home page. `<` is escaped so the text cannot close the script. */
 function softwareData(description: string, url: string, image: string): string {
   const data = {
     '@context': 'https://schema.org',
