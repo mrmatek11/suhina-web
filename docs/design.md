@@ -8,7 +8,7 @@ before it goes in.
 
 - **Two colours and one line.** `--ink` on `--paper`, with `--olive` and `--muted` as the two
   greys for secondary text and `--line` for rules. Dark and light swap the same tokens.
-  `--accent`, the yellow of the logo, is only ever a line: the underline of a link or of the
+  `--accent`, the yellow of the logo, is only ever a line: the short bar above a chapter heading, the underline of a link or of the
   selected item, and the focus ring. It never fills a shape and never colours text. Any other
   colour on a page comes from screenshots of Suhina.
 - **One typeface.** Host Grotesk in weights 400 and 600. `--mono` (Geist Mono) is only for

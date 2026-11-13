@@ -51,7 +51,7 @@ const devices = [
       </div>
     </motion.section>
 
-    <HomeChapter id="song" number="01" title="Start with a loop. Decide where it goes.">
+    <HomeChapter id="song" title="Start with a loop. Decide where it goes.">
       <p>Launch clips and scenes in Session. Shape audio and MIDI on the Arrangement timeline. Both are part of the same project.</p><p>A short idea can become a song without leaving the workstation.</p><p><a class="link" :href="`${base}shortcuts/`">Find the keys for it</a></p>
     </HomeChapter>
     <figure class="stage shot">
@@ -59,41 +59,41 @@ const devices = [
       <figcaption>Arrangement. Audio and MIDI, arranged together.</figcaption>
     </figure>
 
-    <HomeChapter id="themes" number="02" title="Make it look like yours." ruled>
+    <HomeChapter id="themes" title="Make it look like yours." ruled>
       <p>Suhina's look is a theme, written in CSS with SVG and PNG artwork. Choose a built-in theme, change its settings, move the interface around, or write your own.</p><p>Export a theme as one .theme.suhina file to share it.</p><p><a class="link" :href="`${base}settings/?category=Themes`">Explore theme settings</a></p>
     </HomeChapter>
     <ThemeGallery />
 
-    <HomeChapter id="sample-map" number="03" title="You know the sound. Maybe not its name.">
+    <HomeChapter id="sample-map" title="You know the sound. Maybe not its name.">
       <p>The sample map groups your samples by how they sound. Similar sounds become neighbors, so one good find can lead you to the next.</p><p>Explore a cloud or a grid, preview samples as you move through the map, and bring a sound into your project.</p><p><a class="link" :href="`${base}settings/?category=Browser&q=sample+map`">Explore sample map settings</a></p><p class="note">The illustration shows the idea. In Suhina, the map is built from samples in your library.</p>
     </HomeChapter>
     <div class="stage"><SampleMapStudy /></div>
 
-    <HomeChapter id="features" number="04" title="Let an agent work with you.">
+    <HomeChapter id="features" title="Let an agent work with you.">
       <p>Your AI agent can inspect and edit the project open in Suhina. See the changes in the same window, hear them in your song, and use the same undo history.</p><p>You choose when to let an agent in. Enable access, approve the connection, and disconnect it from Suhina when you're done.</p><p><a class="link" :href="`${base}settings/?q=agents`">Explore agent access</a></p><p class="note">Requires an external agent that supports MCP, the connection standard Suhina uses. Agent access is off until you enable it.</p>
     </HomeChapter>
 
-    <HomeChapter id="devices" number="05" title="Instruments and effects, in the box." ruled>
+    <HomeChapter id="devices" title="Instruments and effects, in the box." ruled>
       <p>Suhina comes with its own devices. Every change to a control is one undo step, and automation can take it over.</p><p>You can also build audio effects, MIDI effects and instruments with the device SDK and share each one as a single .sd file.</p><p><a class="link" :href="`${repository}/blob/main/docs/device-sdk.md`" target="_blank" rel="noreferrer">Read the device SDK guide</a></p>
       <template #after>
       <ul class="rows device-list"><li v-for="device in devices" :key="device.name"><h3>{{ device.name }}</h3><p>{{ device.detail }}</p></li></ul>
       </template>
     </HomeChapter>
 
-    <HomeChapter id="plug-ins" number="06" title="Bring your plug-ins along." ruled>
+    <HomeChapter id="plug-ins" title="Bring your plug-ins along." ruled>
       <p>Use CLAP and VST3 instruments and effects in a separate plug-in host. Supported plug-ins receive the song's tempo and playback position.</p><p class="note">Experimental ARA support lets compatible editors work with Arrangement audio clips. Compatibility and the wider ARA workflow are still being developed.</p>
     </HomeChapter>
 
-    <HomeChapter id="import" number="07" title="A new place for an old project.">
+    <HomeChapter id="import" title="A new place for an old project.">
       <p>Open existing .als projects, bring in audio and MIDI, and save your work in Suhina's own project format.</p><p class="note">Project import is evolving. Not every imported device or feature is reproduced; try your material and tell us what needs work.</p>
     </HomeChapter>
 
-    <HomeChapter id="progress" number="08" title="Built in public. Counted in public." ruled>
+    <HomeChapter id="progress" title="Built in public. Counted in public." ruled>
       <p>The maintainers count how much of each area of Suhina works today from their feature list, and a bot redraws the figure every day.</p><p class="open-links"><a class="link" href="https://github.com/suhina-daw/suhina-status" target="_blank" rel="noreferrer">See today's status by area</a><a class="link" :href="`${repository}/blob/main/ROADMAP.md`" target="_blank" rel="noreferrer">What works &amp; what's next</a></p>
     </HomeChapter>
     <ScreenWall />
 
-    <HomeChapter id="download" number="09" title="Early days. Real things to try.">
+    <HomeChapter id="download" title="Early days. Real things to try.">
       <p>Open projects. Launch clips. Edit audio and MIDI. Explore the sample map. Work with plug-ins and connect an agent.</p><p class="note">Expect unfinished workflows, changing behavior and bugs. Start with copies of your projects. These are nightly development builds, not a stable release.</p>
       <template #after>
       <ul class="rows platforms"><li v-for="download in downloads" :key="download.name"><a :href="`${repository}/releases/download/nightly/${download.file}`"><b>{{ download.name }}</b><span>{{ download.detail }}</span></a></li></ul>
