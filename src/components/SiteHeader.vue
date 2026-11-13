@@ -28,7 +28,7 @@ const home = props.page === 'home'
   <div v-if="home" class="subbar">
     <a class="sub-name" href="#home">Suhina <span>Pre-alpha</span></a>
     <nav aria-label="On this page">
-      <a href="#features">Agents</a><a href="#sample-map">Sample map</a><a href="#song">Session &amp; Arrangement</a><a href="#plug-ins">Plug-ins</a><a href="#import">Import</a>
+      <a href="#song">Session &amp; Arrangement</a><a href="#sample-map">Sample map</a><a href="#features">Agents</a><a href="#devices">Devices</a><a href="#themes">Themes</a><a href="#progress">Progress</a>
     </nav>
     <span class="sub-price">Free</span>
     <a class="download" href="#download">Download <span aria-hidden="true">↓</span></a>

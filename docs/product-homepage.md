@@ -77,3 +77,16 @@ the build. Never commit that unmerged preview data to this web branch or deploy 
 Review the copy, desktop/mobile layout, the actual Arrangement screenshot and full-size link, sound-neighborhood
 controls, guide navigation, direct page refreshes, settings search, shortcut search and the
 Contribute disclosure. No deployment is part of this task.
+
+## November 2026 sections
+
+Added with the redesign and checked against DAW main on 2026-11-13; recheck before changing them:
+
+- Devices: the list is the devices marked done in the DAW's `ROADMAP.md` (Built-in effects and
+  instruments). The SDK sentence follows the DAW README's Contributing section.
+- Themes: the copy follows `ROADMAP.md` (What works now, the theme entries). The screenshots are
+  the DAW's `docs/design/reference/theme-*.png`, copied unchanged to `public/assets/product/`.
+  The `*-minimal-v3.png` files there are design mockups (see the DAW's `ATTRIBUTION.md`) and must
+  not be shown as the product.
+- Progress: the two sentences are the DAW README's own, and the figure is loaded from
+  `suhina-daw/suhina-status`, which a bot redraws daily, so the numbers are never written here.
