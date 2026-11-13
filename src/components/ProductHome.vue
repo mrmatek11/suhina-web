@@ -130,7 +130,8 @@ const themes = [
 <style scoped>
 .product-home { --cols: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr); }
 
-.hero-top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--gutter); align-items: end; padding: clamp(40px, 5vw, 72px) var(--gutter) clamp(24px, 3vw, 48px); }
+.hero-top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--gutter); align-items: end; padding: clamp(32px, 4vw, 56px) var(--gutter) clamp(24px, 3vw, 44px); }
+.hero-top h1 { font-size: clamp(48px, min(8vw, 13vh), 128px); }
 .hero-description { font-size: 19px; color: var(--olive); }
 .hero-actions, .open-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin: 24px 0 0; }
 .hero-actions .download { padding: 12px 18px; font-size: 14px; }
@@ -139,7 +140,9 @@ const themes = [
 .stage { margin: 0; padding: clamp(20px, 4vw, 64px) var(--gutter); background: #000; color: #ededea; }
 .stage img { display: block; width: 100%; height: auto; }
 .stage figcaption { margin-top: 12px; font-size: 14px; color: #8a8a85; }
-.hero-media { padding-bottom: 0; }
+.hero-media { padding-block: clamp(16px, 2.4vw, 40px) 0; }
+/* The first screen shows the top of the app and the headline together. */
+.hero-media img { height: min(44vh, 52vw); object-fit: cover; object-position: top; }
 .hero-media img, .shot img, .shot figcaption, .status img { width: min(100%, 1280px); margin-inline: auto; }
 .status img { width: min(100%, 880px); }
 .gallery { display: flex; gap: clamp(16px, 2vw, 32px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: thin; scrollbar-color: #333 transparent; }
