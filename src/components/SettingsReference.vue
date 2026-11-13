@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { motion, useReducedMotion } from 'motion-v'
 import { filterSettings, pageLabel, pageList } from '../data/settings'
 import type { Category, Setting } from '../data/settings'
 import SettingEntry from './SettingEntry.vue'
@@ -10,7 +9,6 @@ const props = defineProps<{ settings: Setting[]; loading: boolean; error: string
 const emit = defineEmits<{ category: [category: Category]; retry: [] }>()
 const query = ref(typeof window === 'undefined' ? '' : new URLSearchParams(window.location.search).get('q')?.slice(0, 200) ?? '')
 const searchInput = ref<HTMLInputElement | null>(null)
-const reducedMotion = useReducedMotion()
 const matches = computed(() => filterSettings(props.settings, props.category, query.value))
 const resultLabel = computed(() => `${matches.value.length} ${matches.value.length === 1 ? 'entry' : 'entries'} in ${props.category === 'All' ? 'all settings' : pageLabel(props.category)}`)
 const categories = computed(() => pageList(props.settings))
@@ -30,16 +28,13 @@ defineExpose({ clearSearch, focusSearch })
       <button v-for="key in categories" :key="key" :class="{ active: category === key }" :aria-pressed="category === key" @click="emit('category', key)">{{ pageLabel(key) }}</button>
     </div>
     <div class="results-top"><span id="result-count" role="status" aria-live="polite">{{ loading ? 'Loading settings…' : error ? 'Settings unavailable' : resultLabel }}</span><button id="reset-filters" @click="emit('category', 'All')">Reset filters</button></div>
-    <motion.div :key="category" id="settings-results"
-      :initial="{ opacity: reducedMotion || replacingPrerender() ? 1 : 0.35 }"
-      :animate="{ opacity: 1 }"
-      :transition="{ duration: reducedMotion ? 0 : 0.5, ease: [0.4, 0, 0.2, 1] }">
+    <div :key="category" id="settings-results" :class="{ 'fade-in': !replacingPrerender() }">
         <div v-if="error" class="empty" role="alert">{{ error }} <button class="retry" @click="emit('retry')">Try again</button></div>
         <template v-else-if="!loading">
           <SettingEntry v-for="setting in matches" :key="setting.id" :setting="setting" />
           <div v-if="!matches.length" class="empty">No setting found. Try fewer words or choose another category.</div>
         </template>
-    </motion.div>
+    </div>
     <p class="source-note">A living reference, drawn from Suhina's settings table. Audio and other multi-control panels are grouped together.</p>
   </section>
 </template>

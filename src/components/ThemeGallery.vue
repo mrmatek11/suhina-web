@@ -31,7 +31,7 @@ function follow() {
 </script>
 
 <template>
-  <section class="gallery" aria-label="Suhina themes">
+  <section class="stage gallery" aria-label="Suhina themes">
     <div ref="track" class="track" tabindex="0" @scroll.passive="follow" @keydown.left.prevent="show(current - 1)" @keydown.right.prevent="show(current + 1)">
       <figure v-for="(slide, index) in slides" :key="slide.file" :class="{ away: index !== current }" @click="show(index)">
         <AppShot :name="slide.file" :alt="slide.alt" :width="slide.width" :height="slide.height" sizes="(min-width: 1310px) 1100px, 84vw" />
@@ -39,7 +39,7 @@ function follow() {
       </figure>
     </div>
     <div class="controls">
-      <div class="names"><button v-for="(slide, index) in slides" :key="slide.file" type="button" :aria-pressed="index === current" @click="show(index)">{{ slide.title }}</button></div>
+      <div class="stage-tabs"><button v-for="(slide, index) in slides" :key="slide.file" type="button" :aria-pressed="index === current" @click="show(index)">{{ slide.title }}</button></div>
       <div class="steps">
         <span aria-live="polite">{{ current + 1 }} / {{ slides.length }}</span>
         <button type="button" aria-label="Previous theme" :disabled="current === 0" @click="show(current - 1)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 12H4m6-7-7 7 7 7"/></svg></button>
@@ -50,7 +50,7 @@ function follow() {
 </template>
 
 <style scoped>
-.gallery { padding: clamp(20px, 4vw, 64px) 0 clamp(20px, 3vw, 40px); background: #000; color: #ededea; }
+.gallery { padding-inline: 0; }
 .track { display: flex; gap: clamp(12px, 1.6vw, 24px); padding-inline: var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scroll-behavior: smooth; scrollbar-width: none; }
 .track::-webkit-scrollbar { display: none; }
 .track:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
@@ -58,14 +58,10 @@ figure { position: relative; flex: 0 0 min(84%, 1100px); margin: 0; scroll-snap-
 figure.away { opacity: .35; cursor: pointer; }
 figure:last-child { margin-right: max(0px, 100% - min(84%, 1100px)); }
 .controls { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: clamp(16px, 2vw, 28px); padding-inline: var(--gutter); font-size: 14px; }
-.names { display: flex; flex-wrap: wrap; gap: 4px 24px; }
-button { padding: 6px 0; border: 0; background: transparent; color: #8a8a85; }
-button:hover:not(:disabled) { color: #ededea; }
-.names button[aria-pressed=true] { color: #ededea; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 6px; }
 .steps { display: flex; align-items: center; gap: 16px; color: #8a8a85; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.steps button { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #333; color: #ededea; }
+.steps button { display: grid; padding: 0; background: transparent; place-items: center; width: 40px; height: 40px; border: 1px solid #333; color: #ededea; }
 .steps button:hover:not(:disabled) { border-color: #ededea; }
 .steps button:disabled { color: #555; cursor: default; }
-@media (max-width: 720px) { .names { display: none; } .controls { justify-content: end; } }
+@media (max-width: 720px) { .stage-tabs { display: none; } .controls { justify-content: end; } }
 @media (prefers-reduced-motion: reduce) { .track { scroll-behavior: auto; } }
 </style>

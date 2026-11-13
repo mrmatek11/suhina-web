@@ -37,6 +37,14 @@ kbd { padding: 1px 6px; border: 1px solid var(--line) }
 .note, .source-note { font-size: 14px; color: var(--muted) }
 .skip { position: absolute; left: var(--gutter); top: -100px; z-index: 20; padding: 8px 12px; background: var(--ink); color: var(--paper) }
 .skip:focus { top: 8px }
+.stage { margin: 0; padding: clamp(20px, 4vw, 64px) var(--gutter) clamp(20px, 3vw, 40px); background: #000; color: #8a8a85 }
+.stage-tabs { display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 14px }
+.stage-tabs button { padding: 6px 0; border: 0; background: transparent; color: inherit }
+.stage-tabs button:hover { color: #ededea }
+.stage-tabs button[aria-pressed=true] { color: #ededea; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 6px }
+.fade-in { animation: fade-in .5s cubic-bezier(.4, 0, .2, 1) }
+@keyframes fade-in { from { opacity: .35 } }
+@keyframes drop-in { from { opacity: 0; transform: translateY(-4px) } }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
 
 .site-header { position: sticky; top: 0; z-index: 10 }
@@ -89,6 +97,7 @@ main { min-width: 0 }
 .setting-note { color: var(--olive) }
 .setting-plus, .entry-plus { color: var(--muted); text-align: right }
 .setting[open] .setting-plus, .shortcut-entry[open] .entry-plus { transform: rotate(45deg) }
+.setting-body { animation: drop-in .18s }
 .setting-body, .shortcut-body { max-width: 40em; padding: 0 0 24px; color: var(--olive) }
 .source-note { max-width: 44em; margin-top: 28px }
 .empty { padding: 36px 0; color: var(--muted) }
@@ -114,4 +123,4 @@ footer { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); ga
   footer { grid-template-columns: 1fr }
 }
 @media (max-width: 480px) { .reference-link { display: none } }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } * { transition: none !important } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } * { transition: none !important; animation: none !important } }

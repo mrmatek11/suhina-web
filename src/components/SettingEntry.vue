@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { motion, useReducedMotion } from 'motion-v'
 import { pageLabel } from '../data/settings'
 import type { Setting } from '../data/settings'
 
 defineProps<{ setting: Setting }>()
 const open = ref(false)
-const reducedMotion = useReducedMotion()
 // The build's prerender writes every explanation into the closed entry so that it is part of the
 // published page; in the browser it renders when the entry opens, with its entrance animation.
 const prerendering = import.meta.env.SSR
@@ -22,9 +20,7 @@ function toggle(event: Event) {
       <span class="setting-note">{{ setting.note }}</span>
       <span class="setting-plus" aria-hidden="true">+</span>
     </summary>
-    <motion.div v-if="open || prerendering" class="setting-body"
-      :initial="{ opacity: reducedMotion || prerendering ? 1 : 0, y: reducedMotion || prerendering ? 0 : -4 }"
-      :animate="{ opacity: 1, y: 0 }" :transition="{ duration: reducedMotion ? 0 : 0.18 }">
+    <div v-if="open || prerendering" class="setting-body">
       <p>Find it in <strong>Options → Settings → {{ pageLabel(setting.page) }} → {{ setting.section }}</strong>.</p>
       <p v-if="setting.description">{{ setting.description }}</p>
       <dl v-if="setting.options.length">
@@ -34,7 +30,7 @@ function toggle(event: Event) {
       </dl>
       <p v-if="setting.whenToChange"><strong>When to change it:</strong> {{ setting.whenToChange }}</p>
       <p v-if="setting.keys.length">Saved setting: <code v-for="key in setting.keys" :key="key">{{ key }}</code></p>
-    </motion.div>
+    </div>
   </details>
 </template>
 

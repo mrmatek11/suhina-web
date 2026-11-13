@@ -45,7 +45,7 @@ onUnmounted(() => observer?.disconnect())
 </script>
 
 <template>
-  <figure class="reel">
+  <figure class="stage reel">
     <div ref="frame" class="frame">
       <video ref="video" :poster="`${base}${clips[current].file}.webp`" width="960" height="368" muted loop playsinline preload="none" disablepictureinpicture
         :aria-label="clips[current].caption" @click="toggle" @play="playing = true" @pause="playing = false" @timeupdate="tick">
@@ -54,7 +54,7 @@ onUnmounted(() => observer?.disconnect())
       <div class="progress" :style="{ transform: `scaleX(${progress})` }"></div>
     </div>
     <figcaption>
-      <span class="names"><button v-for="(clip, index) in clips" :key="clip.file" type="button" :aria-pressed="index === current" @click="show(index)">{{ clip.name }}</button></span>
+      <span class="stage-tabs"><button v-for="(clip, index) in clips" :key="clip.file" type="button" :aria-pressed="index === current" @click="show(index)">{{ clip.name }}</button></span>
       <span class="caption" aria-live="polite">{{ clips[current].caption }}</span>
       <button type="button" class="play" @click="toggle">{{ playing ? 'Pause' : 'Play' }}</button>
     </figcaption>
@@ -62,17 +62,12 @@ onUnmounted(() => observer?.disconnect())
 </template>
 
 <style scoped>
-.reel { margin: 0; padding: clamp(20px, 4vw, 64px) var(--gutter) clamp(20px, 3vw, 40px); background: #000; color: #8a8a85; }
 .frame, figcaption { width: min(100%, 1120px); margin-inline: auto; }
 .frame { position: relative; aspect-ratio: 960 / 368; overflow: hidden; border: 1px solid #262626; background: #111; }
 video { display: block; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
 .progress { position: absolute; inset: auto 0 0; height: 2px; background: var(--accent); transform-origin: left; }
 figcaption { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 8px 32px; margin-top: clamp(14px, 1.6vw, 22px); font-size: 14px; }
-.names { display: flex; gap: 24px; }
-button { padding: 6px 0; border: 0; background: transparent; color: inherit; }
-button:hover { color: #ededea; }
-.names button[aria-pressed=true] { color: #ededea; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 6px; }
-.play { min-width: 3.2em; color: #ededea; text-align: right; }
+.play { min-width: 3.2em; padding: 6px 0; border: 0; background: transparent; color: #ededea; text-align: right; }
 @media (max-width: 720px) {
   figcaption { grid-template-columns: 1fr auto; }
   .caption { grid-column: 1 / -1; grid-row: 2; }

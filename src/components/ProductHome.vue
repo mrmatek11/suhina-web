@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { motion, useReducedMotion } from 'motion-v'
 import AppShot from './AppShot.vue'
 import FeatureReel from './FeatureReel.vue'
 import HomeChapter from './HomeChapter.vue'
@@ -7,50 +6,13 @@ import SampleMapStudy from './SampleMapStudy.vue'
 import ScreenWall from './ScreenWall.vue'
 import ThemeGallery from './ThemeGallery.vue'
 import ViewSwitch from './ViewSwitch.vue'
-import { replacingPrerender } from '../prerendered'
+import { devices, downloads, features, repository } from '../data/home'
 const base = import.meta.env.BASE_URL
-const reducedMotion = useReducedMotion()
-const still = replacingPrerender()
-const repository = 'https://github.com/suhina-daw/suhina-daw'
-const features = [
-  { name: 'Several projects at once', detail: 'Open projects in tabs and move between them with Ctrl+Tab. The active one plays.' },
-  { name: 'Take lanes and comping', detail: 'Record takes into the Arrangement, then cut and move the best parts together.' },
-  { name: 'Piano roll', detail: 'Edit MIDI notes with the mouse or the keyboard, and quantise them.' },
-  { name: 'Automation lanes', detail: 'Show a track\'s automation in lanes under it in the Arrangement.' },
-  { name: 'Time-stretching as it plays', detail: 'Warped clips follow their warp markers and the song\'s tempo in real time.' },
-  { name: 'Follow actions', detail: 'A launched clip can run an action when its time is up.' },
-  { name: 'Updates from inside the app', detail: 'Suhina says when a newer nightly is out. Nothing is installed until you ask.' },
-  { name: 'A command line', detail: 'suhina-cli plays and renders a project without opening the window.' },
-]
-const downloads = [
-  { name: 'Windows', detail: 'x64, ZIP', file: 'suhina-nightly-windows-x86_64.zip' },
-  { name: 'macOS', detail: 'Universal, TAR.GZ', file: 'suhina-nightly-macos-universal.tar.gz' },
-  { name: 'Linux', detail: 'x86_64, TAR.GZ', file: 'suhina-nightly-linux-x86_64.tar.gz' },
-]
-const devices = [
-  { name: 'FM Synth', detail: 'Six operators, 43 algorithms. Reads DX7 voices.' },
-  { name: 'Sampler', detail: 'Sample, slice and grain playback.' },
-  { name: 'EQ', detail: 'Eight bands. Stereo, left/right or mid/side.' },
-  { name: 'Compressor', detail: 'Soft knee, side-chain high-pass, dry/wet.' },
-  { name: 'Multiband', detail: 'Three bands of upward and downward dynamics.' },
-  { name: 'Limiter', detail: 'Brickwall, with lookahead.' },
-  { name: 'Delay', detail: 'Synced or free. Ping-pong and freeze.' },
-  { name: 'Reverb', detail: 'Algorithmic, with freeze.' },
-  { name: 'Saturator', detail: 'Eight curves and a waveshaper.' },
-  { name: 'Overdrive', detail: 'Oversampled drive.' },
-  { name: 'Vinyl Distortion', detail: 'Oversampled distortion.' },
-  { name: 'DJ EQ', detail: 'Three bands with kills.' },
-  { name: 'Auto Pan', detail: 'Moves a sound across the stereo field.' },
-  { name: 'Utility', detail: 'Gain and the basics.' },
-  { name: 'NAM Amp Modeler', detail: 'Plays .nam amp captures.' },
-  { name: 'NAM Cab Loader', detail: 'Cabinet impulse responses from .wav files.' },
-  { name: 'Pitch', detail: 'A MIDI effect. Transposes by semitones or scale degrees.' },
-]
 </script>
 
 <template>
   <div class="product-home">
-    <motion.section id="home" :initial="{ opacity: reducedMotion || still ? 1 : 0 }" :animate="{ opacity: 1 }" :transition="{ duration: reducedMotion || still ? 0 : .5 }">
+    <section id="home">
       <figure class="stage hero-media">
         <AppShot name="suhina-project" alt="A song of seventy tracks in Suhina's Arrangement: audio and MIDI clips in track colors along the timeline, with a clip's warp, gain and pitch controls below" sizes="(min-width: 1720px) 1600px, 100vw" :width="1919" :height="917" eager />
       </figure>
@@ -61,7 +23,7 @@ const devices = [
           <p class="hero-actions"><a class="download" href="#download">Try the pre-alpha</a><a class="link" :href="`${base}guide/`">Read the guide</a></p>
         </div>
       </div>
-    </motion.section>
+    </section>
 
     <HomeChapter id="song" title="Start with a loop. Decide where it goes.">
       <p>Launch clips and scenes in Session. Shape audio and MIDI on the Arrangement timeline. Both are part of the same project.</p><p>A short idea can become a song without leaving the workstation.</p><p><a class="link" :href="`${base}shortcuts/`">Find the keys for it</a></p>
@@ -144,8 +106,8 @@ const devices = [
 .hero-actions, .open-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin: 24px 0 0; }
 .hero-actions .download { padding: 12px 18px; font-size: 14px; }
 
-.stage { margin: 0; padding: clamp(20px, 4vw, 64px) var(--gutter); background: #000; color: #ededea; }
-.stage figcaption { margin-top: 12px; font-size: 14px; color: #8a8a85; }
+.command code { color: #ededea; }
+.command figcaption { margin-top: 12px; font-size: 14px; }
 .hero-media { padding-block: clamp(16px, 2.4vw, 40px) 0; }
 .hero-media img { width: min(100%, 1600px); max-height: 46vh; margin-inline: auto; object-fit: cover; object-position: top; }
 .command code { display: block; font-size: clamp(18px, 3.2vw, 44px); letter-spacing: -.02em; overflow-wrap: anywhere; }

@@ -17,7 +17,7 @@ const points = kinds.flatMap(kind => Array.from({ length: 43 }, (_, i) => ({ kin
       <circle v-for="(point, index) in points" :key="index" :cx="point.x" :cy="point.y" :r="point.r" :fill="point.color" :opacity="selected === 'All sounds' || selected === point.kind ? 0.9 : 0.1"/>
     </svg>
     <div class="map-side">
-      <div class="kind-controls" aria-label="Highlight an illustrated sound neighborhood"><button :aria-pressed="selected === 'All sounds'" @click="selected = 'All sounds'">All sounds</button><button v-for="kind in kinds" :key="kind.name" :aria-pressed="selected === kind.name" @click="selected = kind.name">{{ kind.name }}</button></div>
+      <div class="stage-tabs" aria-label="Highlight an illustrated sound neighborhood"><button :aria-pressed="selected === 'All sounds'" @click="selected = 'All sounds'">All sounds</button><button v-for="kind in kinds" :key="kind.name" :aria-pressed="selected === kind.name" @click="selected = kind.name">{{ kind.name }}</button></div>
       <figcaption aria-live="polite">{{ kinds.find(kind => kind.name === selected)?.caption ?? 'Similar sounds become neighbors. Follow a sound, then explore what is nearby.' }}</figcaption>
     </div>
   </figure>
@@ -27,10 +27,6 @@ const points = kinds.flatMap(kind => Array.from({ length: 43 }, (_, i) => ({ kin
 .map-study { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--gutter); align-items: end; margin: 0; }
 svg { display: block; width: 100%; height: auto; }
 circle { transition: opacity .2s; }
-.kind-controls { display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 14px; }
-button { padding: 6px 0; border: 0; background: transparent; color: #8a8a85; }
-button:hover { color: #ededea; }
-button[aria-pressed=true] { color: #ededea; text-decoration: underline; text-decoration-color: #ffd97d; text-decoration-thickness: 2px; text-underline-offset: 5px; }
 figcaption { min-height: 3em; margin-top: 16px; font-size: 17px; color: #ededea; }
 @media (max-width: 720px) { .map-study { grid-template-columns: 1fr; } }
 </style>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { motion, useReducedMotion } from 'motion-v'
 import { categoryList, filterShortcuts, parseShortcuts, platforms, presets } from '../data/shortcuts'
 import type { Platform, Preset, Shortcut } from '../data/shortcuts'
 import { replacingPrerender } from '../prerendered'
@@ -13,7 +12,6 @@ const category = ref('All')
 const query = ref('')
 const loading = ref(!props.initialEntries)
 const error = ref('')
-const reducedMotion = useReducedMotion()
 const matches = computed(() => filterShortcuts(entries.value, category.value, query.value, preset.value, platform.value))
 const categories = computed(() => categoryList(entries.value))
 let controller: AbortController | undefined
@@ -55,7 +53,7 @@ onUnmounted(() => controller?.abort())
       <button v-for="value in categories" :key="value" :class="{ active: category === value }" :aria-pressed="category === value" @click="category = value">{{ value }}</button>
     </div>
     <div class="results-top"><span role="status" aria-live="polite">{{ loading ? 'Loading shortcuts…' : error ? 'Shortcuts unavailable' : `${matches.length} ${matches.length === 1 ? 'action' : 'actions'} in ${category === 'All' ? 'all categories' : category}` }}</span><button @click="reset">Reset filters</button></div>
-    <motion.div :key="category" :initial="{ opacity: reducedMotion || replacingPrerender() ? 1 : 0.35 }" :animate="{ opacity: 1 }" :transition="{ duration: reducedMotion ? 0 : 0.5 }">
+    <div :key="category" :class="{ 'fade-in': !replacingPrerender() }">
       <div v-if="error" class="empty" role="alert">{{ error }} <button class="retry" @click="load">Try again</button></div>
       <template v-else-if="!loading">
         <details v-for="entry in matches" :id="`shortcut-${entry.id}`" :key="entry.id" class="shortcut-entry">
@@ -67,7 +65,7 @@ onUnmounted(() => controller?.abort())
         </details>
         <p v-if="!matches.length" class="empty">No shortcut found. Try fewer words, another preset or a different category.</p>
       </template>
-    </motion.div>
+    </div>
     <details class="customize-notes"><summary>Make the keys your own</summary><div>
       <p>Open <strong>Options → Settings → Keys → Shortcuts</strong>. Find an action, choose <strong>Change</strong> and press the keys you want. Escape cancels capture. <strong>Clear</strong> removes that action's binding; conflicting assignments are shown in red.</p>
       <p>Choosing Select-first, Draw-first or Mouse-first restores that preset's keys and piano-roll workflow settings, replacing custom bindings. <strong>Reset all</strong> returns to Select-first. Custom keeps the current workflow settings; its bindings are specific to you, so it has no default set to display here.</p>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
-import { MotionConfig } from 'motion-v'
 import SiteHeader from './components/SiteHeader.vue'
 import GuideSidebar from './components/GuideSidebar.vue'
 import ProductHome from './components/ProductHome.vue'
@@ -95,7 +94,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <MotionConfig reduced-motion="user">
     <SiteHeader :page="page" />
     <template v-if="page === 'home'"><main id="main" class="product-page"><ProductHome /></main><SiteFooter /></template>
     <div v-else class="shell">
@@ -107,7 +105,6 @@ onUnmounted(() => {
         <SiteFooter />
       </main>
     </div>
-  </MotionConfig>
 </template>
 
 <style scoped>

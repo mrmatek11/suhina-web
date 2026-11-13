@@ -1,6 +1,6 @@
 # Suhina web
 
-The Suhina product website at [suhina.org](https://suhina.org): the product page, a beginner guide and searchable references for Suhina's settings and keyboard shortcuts. Built with Vue 3, TypeScript, Vite, plain CSS and Motion for Vue.
+The Suhina product website at [suhina.org](https://suhina.org): the product page, a beginner guide and searchable references for Suhina's settings and keyboard shortcuts. Built with Vue 3, TypeScript, Vite and plain CSS.
 
 ## Development
 
