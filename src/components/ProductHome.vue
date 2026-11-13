@@ -17,7 +17,7 @@ const base = import.meta.env.BASE_URL
         <AppShot name="suhina-project" alt="A song of seventy tracks in Suhina's Arrangement: audio and MIDI clips in track colors along the timeline, with a clip's warp, gain and pitch controls below" sizes="(min-width: 1720px) 1600px, 100vw" :width="1919" :height="917" eager />
       </figure>
       <div class="hero-top">
-        <h1>Make music<br>in the open.</h1>
+        <h1>Make music<br>in the <span class="wave">open.<svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="M0 36C38 6 82 0 122 22c42 23 88 30 178 2-78 46-150 48-192 20C74 22 42 22 0 36Z"/></svg></span></h1>
         <div>
           <p class="hero-description">A free music workstation for Windows, macOS and Linux. Explore samples by sound, build songs with clips and a timeline, and invite an AI agent into your project.</p>
           <p class="hero-actions"><a class="download" href="#download">Try the pre-alpha</a><a class="link" :href="`${base}guide/`">Read the guide</a></p>
@@ -101,7 +101,9 @@ const base = import.meta.env.BASE_URL
 .product-home { --cols: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr); }
 
 .hero-top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--gutter); align-items: end; padding: clamp(32px, 4vw, 56px) var(--gutter) clamp(24px, 3vw, 44px); }
-.hero-top h1 { font-size: clamp(48px, min(8vw, 13vh), 128px); }
+.hero-top h1 { font-size: clamp(48px, min(8vw, 13vh), 128px); isolation: isolate; }
+.wave { position: relative; display: inline-block; }
+.wave svg { position: absolute; left: -3%; bottom: -.24em; z-index: -1; width: 108%; height: .46em; fill: var(--wave); }
 .hero-description { font-size: 19px; color: var(--olive); }
 .hero-actions, .open-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin: 24px 0 0; }
 .hero-actions .download { padding: 12px 18px; font-size: 14px; }

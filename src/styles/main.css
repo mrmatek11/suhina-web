@@ -1,6 +1,6 @@
 :root {
   --paper: #f4f4f1; --ink: #111; --olive: #44443f; --muted: #6f6f6a; --line: #d4d4cf;
-  --accent: #d9a21b;
+  --accent: #d9a21b; --wave: #ffd97d;
   --mono: 'Geist Mono', ui-monospace, monospace; --sans: 'Host Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --gutter: clamp(16px, 3.4vw, 56px); --bar: 60px;
   color-scheme: light;

@@ -9,8 +9,9 @@ before it goes in.
 - **Two colours and one line.** `--ink` on `--paper`, with `--olive` and `--muted` as the two
   greys for secondary text and `--line` for rules. Dark and light swap the same tokens.
   `--accent`, the yellow of the logo, is only ever a line: the underline of a link or of the
-  selected item, and the focus ring. It never fills a shape and never colours text. Any other
-  colour on a page comes from screenshots of Suhina.
+  selected item, and the focus ring. It never fills a shape and never colours text. The one
+  filled shape is `--wave`, the wave of the logo, under a word of the home page headline. Any
+  other colour on a page comes from screenshots of Suhina.
 - **One typeface.** Host Grotesk in weights 400 and 600. `--mono` (Geist Mono) is only for
   things a person types or reads from a screen: keys, file names, saved setting names.
 - **Five sizes.** 14 px notes, 17 px text, 22 px item names, the `h2` scale and the `h1` scale.
