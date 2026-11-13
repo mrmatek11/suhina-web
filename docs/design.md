@@ -6,9 +6,11 @@ before it goes in.
 
 ## What the page is made of
 
-- **Two colours.** `--ink` on `--paper`, with `--olive` and `--muted` as the two greys for
-  secondary text and `--line` for rules. Dark and light swap the same tokens. The only colour on
-  a page comes from the logo and from screenshots of Suhina.
+- **Two colours and one line.** `--ink` on `--paper`, with `--olive` and `--muted` as the two
+  greys for secondary text and `--line` for rules. Dark and light swap the same tokens.
+  `--accent`, the yellow of the logo, is only ever a line: the underline of a link or of the
+  selected item, and the focus ring. It never fills a shape and never colours text. Any other
+  colour on a page comes from screenshots of Suhina.
 - **One typeface.** Host Grotesk in weights 400 and 600. `--mono` (Geist Mono) is only for
   things a person types or reads from a screen: keys, file names, saved setting names.
 - **Five sizes.** 14 px notes, 17 px text, 22 px item names, the `h2` scale and the `h1` scale.
@@ -25,7 +27,7 @@ before it goes in.
 - Dots, glyph arrows (↗ → ↓) and icons as decoration. An icon is allowed only where it is the
   control itself (the theme switch, the `+` of a row that opens).
 - Uppercase labels above headings, slogans, counters and other kickers.
-- Accent colours, coloured hover states and highlighted blocks.
+- A second accent, coloured hover states and highlighted blocks.
 - Cards and boxes. Group with space and a rule, not a border around the thing.
 - Text that repeats a neighbour. One heading, one or two short paragraphs, one link.
 

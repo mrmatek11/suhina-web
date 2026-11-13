@@ -1,5 +1,4 @@
 <script setup lang="ts">
-defineProps<{ count: number | null }>()
 const base = import.meta.env.BASE_URL
 </script>
 

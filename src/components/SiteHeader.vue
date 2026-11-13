@@ -28,17 +28,18 @@ const home = props.page === 'home'
   <div v-if="home" class="subbar">
     <a class="sub-name" href="#home">Suhina</a>
     <nav aria-label="On this page">
-      <a href="#song">Overview</a><a href="#devices">Devices</a><a href="#themes">Themes</a><a href="#progress">Progress</a>
+      <a href="#song">Overview</a><a href="#themes">Themes</a><a href="#devices">Devices</a><a href="#progress">Progress</a>
     </nav>
-    <span>Free, pre-alpha</span>
-    <a class="download" href="#download">Download</a>
+    <div class="sub-tools"><span>Free, pre-alpha</span><a class="download" href="#download">Download</a></div>
   </div>
 </template>
 
 <style scoped>
-.subbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 24px; height: 52px; padding: 0 var(--gutter); background: var(--paper); border-bottom: 1px solid var(--line); font-size: 14px; color: var(--olive); }
+/* The same three columns as the main bar, so the links sit under the logo. */
+.subbar { position: sticky; top: 0; z-index: 10; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; height: 52px; padding: 0 var(--gutter); background: var(--paper); border-bottom: 1px solid var(--line); font-size: 14px; color: var(--olive); }
 .sub-name { font-weight: 600; color: var(--ink); }
-.subbar nav { display: flex; gap: 24px; margin: 0 auto; }
+.subbar nav, .sub-tools { display: flex; align-items: center; gap: 24px; }
+.sub-tools { justify-content: end; }
 .subbar nav a:hover { color: var(--ink); }
-@media(max-width: 720px) { .subbar nav { display: none; } .sub-name { margin-right: auto; } }
+@media(max-width: 720px) { .subbar { grid-template-columns: 1fr auto; } .subbar nav { display: none; } }
 </style>

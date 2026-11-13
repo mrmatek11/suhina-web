@@ -101,7 +101,7 @@ onUnmounted(() => {
     <div v-else class="shell">
       <GuideSidebar :category="category" :page="page" @category="selectCategory" @search="focusSearch" />
       <main class="reference-page">
-        <template v-if="page === 'guide'"><GuideSection :count="loaded ? settings.length : null" /><FirstSound /></template>
+        <template v-if="page === 'guide'"><GuideSection /><FirstSound /></template>
         <SettingsReference v-if="page === 'settings'" ref="reference" :settings="settings" :category="category" :loading="loading" :error="error" @category="selectCategory" @retry="loadSettings" />
         <ShortcutsReference v-if="page === 'shortcuts'" :initial-entries="initialShortcuts" />
         <SiteFooter />
