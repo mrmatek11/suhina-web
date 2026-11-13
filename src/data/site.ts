@@ -45,7 +45,27 @@ export function headTags(page: SitePage, title: string, description: string, ori
     `<meta property="og:image:height" content="${shareImage.height}">`,
     `<meta property="og:image:alt" content="${attribute(shareImage.alt)}">`,
     '<meta name="twitter:card" content="summary_large_image">',
+    ...(page === 'home' ? [softwareData(description, url, image)] : []),
   ].join('\n  ')
+}
+
+/** What Suhina is, for search engines (schema.org), on the home page. `<` is escaped so the text cannot close the script. */
+function softwareData(description: string, url: string, image: string): string {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Suhina',
+    description,
+    url,
+    image,
+    applicationCategory: 'MultimediaApplication',
+    applicationSubCategory: 'Digital audio workstation',
+    operatingSystem: 'Windows, macOS, Linux',
+    license: 'https://www.gnu.org/licenses/gpl-3.0.html',
+    codeRepository: 'https://github.com/suhina-daw/suhina-daw',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  }
+  return `<script type="application/ld+json">${JSON.stringify(data).replaceAll('<', '\\u003c')}</script>`
 }
 
 function single(html: string, pattern: RegExp, what: string): RegExpMatchArray {

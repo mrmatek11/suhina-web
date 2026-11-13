@@ -51,8 +51,6 @@ onUnmounted(() => system?.removeEventListener('change', follow))
 </template>
 
 <style scoped>
-.theme-toggle { display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; }
-.theme-toggle:hover { border-color: var(--ink); }
-.theme-toggle:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
-.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.theme-toggle { display: inline-grid; place-items: center; width: 24px; height: 24px; padding: 0; border: 0; background: transparent; color: var(--olive); }
+.theme-toggle:hover { color: var(--ink); }
 </style>

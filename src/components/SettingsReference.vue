@@ -12,7 +12,7 @@ const query = ref(typeof window === 'undefined' ? '' : new URLSearchParams(windo
 const searchInput = ref<HTMLInputElement | null>(null)
 const reducedMotion = useReducedMotion()
 const matches = computed(() => filterSettings(props.settings, props.category, query.value))
-const resultLabel = computed(() => `${String(matches.value.length).padStart(2, '0')} ENTRIES / ${props.category === 'All' ? 'ALL SETTINGS' : pageLabel(props.category).toUpperCase()}`)
+const resultLabel = computed(() => `${matches.value.length} ${matches.value.length === 1 ? 'entry' : 'entries'} in ${props.category === 'All' ? 'all settings' : pageLabel(props.category)}`)
 const categories = computed(() => pageList(props.settings))
 function clearSearch() { query.value = '' }
 function focusSearch() { searchInput.value?.focus({ preventScroll: true }) }
@@ -21,20 +21,20 @@ defineExpose({ clearSearch, focusSearch })
 </script>
 
 <template>
-  <section class="settings-section" id="settings" :aria-busy="loading">
-    <div class="section-heading"><div><div class="eyebrow">SMALL CONTROLS. BIG DIFFERENCE.</div><h1 class="reference-title">Meet your settings.</h1></div><span class="shortcut">Open in Suhina <kbd>Ctrl</kbd> + <kbd>,</kbd></span></div>
+  <section class="page-section" id="settings" :aria-busy="loading">
+    <div class="section-heading"><h1 class="page-title">Meet your settings.</h1><span class="shortcut">Open in Suhina <kbd>Ctrl</kbd> + <kbd>,</kbd></span></div>
     <p class="section-intro">You don't need to learn every option. Just find the one you need.</p>
-    <label class="search-box"><span aria-hidden="true">⌕</span><input ref="searchInput" v-model="query" id="settings-search" type="search" placeholder="Try “buffer”, “backups”, or “piano roll”…" aria-label="Search settings" @keydown.esc="escapeSearch"><kbd>/</kbd></label>
+    <label class="search-box"><input ref="searchInput" v-model="query" id="settings-search" type="search" placeholder="Try “buffer”, “backups”, or “piano roll”…" aria-label="Search settings" @keydown.esc="escapeSearch"><kbd>/</kbd></label>
     <div class="filter-bar" id="filters" aria-label="Filter settings by category">
       <button :class="{ active: category === 'All' }" :aria-pressed="category === 'All'" @click="emit('category', 'All')">All settings</button>
       <button v-for="key in categories" :key="key" :class="{ active: category === key }" :aria-pressed="category === key" @click="emit('category', key)">{{ pageLabel(key) }}</button>
     </div>
-    <div class="results-top"><span id="result-count" role="status" aria-live="polite">{{ loading ? 'LOADING SETTINGS…' : error ? 'SETTINGS UNAVAILABLE' : resultLabel }}</span><button id="reset-filters" @click="emit('category', 'All')">Reset filters ↺</button></div>
+    <div class="results-top"><span id="result-count" role="status" aria-live="polite">{{ loading ? 'Loading settings…' : error ? 'Settings unavailable' : resultLabel }}</span><button id="reset-filters" @click="emit('category', 'All')">Reset filters</button></div>
     <motion.div :key="category" id="settings-results"
       :initial="{ opacity: reducedMotion || replacingPrerender() ? 1 : 0.35 }"
       :animate="{ opacity: 1 }"
       :transition="{ duration: reducedMotion ? 0 : 0.5, ease: [0.4, 0, 0.2, 1] }">
-        <div v-if="error" class="empty" role="alert">{{ error }} <button class="retry" @click="emit('retry')">Try again ↗</button></div>
+        <div v-if="error" class="empty" role="alert">{{ error }} <button class="retry" @click="emit('retry')">Try again</button></div>
         <template v-else-if="!loading">
           <SettingEntry v-for="setting in matches" :key="setting.id" :setting="setting" />
           <div v-if="!matches.length" class="empty">No setting found. Try fewer words or choose another category.</div>
@@ -44,6 +44,3 @@ defineExpose({ clearSearch, focusSearch })
   </section>
 </template>
 
-<style scoped>
-.retry { background: transparent; border: 0; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-</style>

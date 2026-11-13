@@ -18,7 +18,7 @@ function toggle(event: Event) {
 <template>
   <details class="setting" @toggle="toggle">
     <summary>
-      <div><span class="setting-title"><span class="setting-name">{{ setting.name }}</span><span v-if="setting.workInProgress" class="progress-pill">Work in progress</span></span><span class="setting-path">{{ pageLabel(setting.page) }} / {{ setting.section }}</span></div>
+      <div><span class="setting-name">{{ setting.name }}</span><span class="setting-path">{{ pageLabel(setting.page) }} / {{ setting.section }}<template v-if="setting.workInProgress">. Work in progress.</template></span></div>
       <span class="setting-note">{{ setting.note }}</span>
       <span class="setting-plus" aria-hidden="true">+</span>
     </summary>
@@ -39,8 +39,7 @@ function toggle(event: Event) {
 </template>
 
 <style scoped>
-.setting-title { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
-.progress-pill { display: inline-block; padding: 3px 8px; border-radius: 999px; background: var(--orange); color: var(--on-orange); font: 9px/1.4 var(--mono); white-space: nowrap; }
-dd { margin: 3px 0 12px 18px; }
-code + code { margin-left: 5px; }
+dl { margin: 0 0 1em; }
+dd { margin: 2px 0 12px 18px; }
+code + code { margin-left: 8px; }
 </style>
