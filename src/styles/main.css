@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Host+Grotesk:wght@400;500;600;700&display=swap');
 
 /* Tokens. Dark is the house look; light keeps the same structure on off-white.
    --orange is the single accent (the yellow of the logo); --olive is secondary text. */
@@ -6,7 +6,7 @@
   --paper: #f2f2ef; --raised: #e8e8e4; --ink: #121212; --muted: #6a6a66; --line: #d6d6d1;
   --orange: #f2b51c; --on-orange: #121212; --olive: #4a4a46;
   --sand: #c9c4b6; --sand-edge: #8f8a7c; --clay: #b9b9b4; --clay-edge: #7c7c77;
-  --mono: 'DM Mono', ui-monospace, monospace; --sans: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, monospace; --sans: 'Host Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --gutter: clamp(16px, 3.4vw, 56px); --bar: 64px;
   color-scheme: light;
 }
@@ -47,7 +47,9 @@ h3 { font-size: 18px; letter-spacing: -.01em; margin: 0 0 8px; line-height: 1.2 
 kbd { font: 12px var(--mono); border: 1px solid var(--line); padding: 1px 6px; border-radius: 4px; color: var(--muted) }
 
 /* Header */
-.topbar { position: sticky; top: 0; z-index: 10; height: var(--bar); display: flex; align-items: center; gap: 28px; padding: 0 var(--gutter); background: var(--paper); border-bottom: 1px solid var(--line) }
+.site-header { position: sticky; top: 0; z-index: 10 }
+.site-header.home { position: static }
+.topbar { height: var(--bar); display: flex; align-items: center; gap: 28px; padding: 0 var(--gutter); background: var(--paper); border-bottom: 1px solid var(--line) }
 .brand { display: flex; align-items: center }
 .brand-logo { display: block; width: 104px; height: auto }
 .topbar nav { display: flex; gap: 26px; margin-left: auto }

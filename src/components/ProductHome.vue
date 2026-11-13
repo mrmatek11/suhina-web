@@ -16,6 +16,9 @@ const downloads = [
 <template>
   <div class="product-home">
     <motion.section id="home" class="hero" :initial="{ opacity: reducedMotion || still ? 1 : 0 }" :animate="{ opacity: 1 }" :transition="{ duration: reducedMotion || still ? 0 : .5 }">
+      <figure class="stage hero-media">
+        <a :href="`${base}assets/product/suhina-session.png`" target="_blank" rel="noreferrer" aria-label="View the Suhina Session screenshot at full size"><img :src="`${base}assets/product/suhina-session.png`" alt="Suhina Session view with colored clips for drums, bass, keys and vocals above a mixer with faders and level meters" width="1280" height="800" fetchpriority="high"></a>
+      </figure>
       <div class="hero-top">
         <h1>Make music<br>in the open.</h1>
         <div class="hero-side">
@@ -24,10 +27,6 @@ const downloads = [
           <div class="hero-actions"><a class="primary-action" href="#download">Try the pre-alpha <span aria-hidden="true">↓</span></a><a class="text-action" :href="`${base}guide/`">Read the guide <span aria-hidden="true">↗</span></a></div>
         </div>
       </div>
-      <figure class="stage hero-media">
-        <a class="product-capture" :href="`${base}assets/product/suhina-arrangement.png`" target="_blank" rel="noreferrer" aria-label="View the Suhina Arrangement screenshot at full size"><img :src="`${base}assets/product/suhina-arrangement.png`" alt="Suhina Arrangement showing audio waveforms, MIDI note clips and track controls together on the song timeline" width="1251" height="492" fetchpriority="high"></a>
-        <figcaption><span>Arrangement. Audio and MIDI, arranged together.</span><a :href="`${base}assets/product/suhina-arrangement.png`" target="_blank" rel="noreferrer">View full size ↗</a></figcaption>
-      </figure>
     </motion.section>
 
     <section id="features" class="chapter">
@@ -40,24 +39,24 @@ const downloads = [
       <ol class="agent-flow"><li><span>01</span><b>Read the project</b><small>Tracks, clips, notes.</small></li><li><span>02</span><b>Make an edit</b><small>Visible in your open song.</small></li><li><span>03</span><b>Keep or undo</b><small>Your project's edit history.</small></li></ol>
     </div>
 
-    <section class="chapter">
+    <section id="sample-map" class="chapter">
       <div class="chapter-title"><span class="num">/ 02</span><h2>You know the sound. Maybe not its name.</h2></div>
       <div class="chapter-body"><p>The sample map groups your samples by how they sound. Similar sounds become neighbors, so one good find can lead you to the next.</p><p>Explore a cloud or a grid, preview samples as you move through the map, and bring a sound into your project.</p><a class="text-action" :href="`${base}settings/?category=Browser&q=sample+map`">Explore sample map settings <span aria-hidden="true">↗</span></a><p class="note">The illustration shows the idea. In Suhina, the map is built from samples in your library.</p></div>
     </section>
     <div class="stage"><SampleMapStudy /></div>
 
-    <section class="chapter">
+    <section id="song" class="chapter">
       <div class="chapter-title"><span class="num">/ 03</span><h2>Start with a loop. Decide where it goes.</h2></div>
       <div class="chapter-body"><p>Launch clips and scenes in Session. Shape audio and MIDI on the Arrangement timeline. Both are part of the same project.</p><p>A short idea can become a song without leaving the workstation.</p><a class="text-action" :href="`${base}shortcuts/`">Find the keys for it <span aria-hidden="true">↗</span></a></div>
     </section>
     <div class="stage song-strip" aria-hidden="true"><span>An idea</span><div class="song-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span>A song</span></div>
 
-    <section class="chapter">
+    <section id="plug-ins" class="chapter">
       <div class="chapter-title"><span class="num">/ 04</span><h2>Bring your plug-ins along.</h2></div>
       <div class="chapter-body"><p>Use CLAP and VST3 instruments and effects in a separate plug-in host. Supported plug-ins receive the song's tempo and playback position.</p><div class="format-tags"><span>CLAP</span><span>VST3</span><span class="experimental-tag">ARA · experimental</span></div><p class="note">Experimental ARA support lets compatible editors work with Arrangement audio clips. Compatibility and the wider ARA workflow are still being developed.</p></div>
     </section>
 
-    <section class="chapter">
+    <section id="import" class="chapter">
       <div class="chapter-title"><span class="num">/ 05</span><h2>A new place for an old project.</h2></div>
       <div class="chapter-body"><p>Open existing .als projects, bring in audio and MIDI, and save your work in Suhina's own project format.</p><div class="file-path" aria-label="Import existing projects and save as Suhina projects"><span>.als</span><span aria-hidden="true">→</span><span>.suhina</span></div><p class="note">Project import is evolving. Not every imported device or feature is reproduced; try your material and tell us what needs work.</p></div>
     </section>
@@ -86,8 +85,7 @@ h1 { margin: 0; font-size: clamp(52px, 8.4vw, 136px); line-height: .92; letter-s
 p { margin: 0 0 1em; }
 
 /* Hero */
-.hero { padding-top: clamp(40px, 6vw, 88px); }
-.hero-top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--gutter); align-items: end; padding: 0 var(--gutter) clamp(36px, 4vw, 56px); }
+.hero-top { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--gutter); align-items: end; padding: clamp(40px, 5vw, 72px) var(--gutter) clamp(24px, 3vw, 48px); }
 .hero-status { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--olive); }
 .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
 .stage-tag { padding: 1px 8px; border: 1px solid var(--line); border-radius: 999px; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
@@ -100,9 +98,9 @@ p { margin: 0 0 1em; }
 
 /* Full-bleed media panels stay dark in both themes, like product photography. */
 .stage { --s-ink: #ededea; --s-muted: #8a8a85; --s-line: #2a2a28; margin: 0; padding: clamp(20px, 4vw, 64px) var(--gutter); background: #0b0b0b; color: var(--s-ink); }
-.hero-media img { display: block; width: 100%; height: auto; border-radius: 6px; box-shadow: 0 30px 80px rgba(0, 0, 0, .55); }
-.hero-media figcaption { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 18px; font-size: 13px; color: var(--s-muted); }
-.hero-media figcaption a:hover { color: var(--s-ink); }
+.hero-media { padding-block: clamp(16px, 3vw, 48px) 0; overflow: hidden; }
+.hero-media a { display: block; width: min(100%, 1280px); margin: 0 auto; }
+.hero-media img { display: block; width: 100%; height: auto; border-radius: 8px 8px 0 0; }
 
 /* Chapters: number and heading on the left, a narrow column of text beside it. */
 .chapter { display: grid; grid-template-columns: var(--cols); gap: var(--gutter); padding: clamp(48px, 6vw, 96px) var(--gutter); }
